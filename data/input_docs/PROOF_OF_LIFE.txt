@@ -1,0 +1,13 @@
+CONFIDENTIAL PROTOCOL 99-Z
+Subject: Zero-Exfiltration Verification
+Date: 2026-01-23
+
+1. Objective
+To demonstrate that The Vault processes local data correctly without external API calls.
+
+2. Procedure
+This document serves as a tracer bullet. If this text appears in 'corpus.jsonl', the ingestion pipeline works.
+
+3. Codes
+Error 999: System Functional.
+Auth Token: XYZ-ALPHA-TEST.
