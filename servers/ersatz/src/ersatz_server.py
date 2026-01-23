@@ -20,13 +20,14 @@ def load_ersatz_modules(ersatz_root_path: str):
         raise
 
 @app.tool(output="answer,confidence,chunks")
-async def semantic_search(query: str, threshold: float = 0.80) -> Dict[str, Any]:
+async def semantic_search(query: str, threshold: float = 0.80, max_chunk_chars: int = 2000) -> Dict[str, Any]:
     """
     Perform semantic search with confidence gating using Ersatz.
     
     Args:
         query: User query.
         threshold: Minimum confidence score (0.0 - 1.0).
+        max_chunk_chars: Max characters to return before using a pointer.
         
     Returns:
         Dict with answer, confidence score, and source chunks.
@@ -37,24 +38,29 @@ async def semantic_search(query: str, threshold: float = 0.80) -> Dict[str, Any]
 
     app.logger.info(f"Ersatz Semantic Search: {query} (Threshold: {threshold})")
     
-    # Cognitron's ask method returns a complex object, we need to serialize it
     result = await cognitron_agent.ask(
         query=query,
         require_high_confidence=True
     )
     
-    # Extract relevant data
     chunks = []
     if result.relevant_chunks:
         for chunk in result.relevant_chunks:
+            
+            content = chunk.content
+            # --- POINTER LOGIC START ---
+            if len(content) > max_chunk_chars:
+                snippet = content[:max_chunk_chars]
+                content = f"{snippet}\n... [TRUNCATED. Full content in {chunk.source_id}]"
+            # --- POINTER LOGIC END ---
+
             chunks.append({
                 "title": chunk.title,
-                "content": chunk.content[:500], # Truncate for transport
+                "content": content,
                 "confidence": chunk.confidence_score,
                 "source": f"Ersatz:{chunk.source_id}"
             })
             
-    # Apply gating logic (redundant if agent.ask does it, but good for safety)
     final_answer = result.answer
     if result.overall_confidence < threshold:
         final_answer = "Information not found with sufficient confidence."
@@ -67,17 +73,9 @@ async def semantic_search(query: str, threshold: float = 0.80) -> Dict[str, Any]
 
 @app.tool(output="status")
 def init_agent(ersatz_path: str, index_path: str) -> Dict[str, str]:
-    """
-    Initialize the Ersatz Agent.
-    
-    Args:
-        ersatz_path: Path to the ersatz_rag/cognitron directory.
-        index_path: Path to the local vector index.
-    """
     global cognitron_agent
     try:
         CognitronAgent = load_ersatz_modules(ersatz_path)
-        
         cognitron_agent = CognitronAgent(
             index_path=Path(index_path),
             memory_path=Path(index_path).parent / "memory.db",

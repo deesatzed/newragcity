@@ -24,12 +24,13 @@ def load_dkr_modules(dkr_root_path: str):
         raise
 
 @app.tool(output="results")
-def lookup_exact(query: str) -> Dict[str, Any]:
+def lookup_exact(query: str, max_chunk_chars: int = 2000) -> Dict[str, Any]:
     """
     Perform a deterministic exact lookup using the DKR TOC Agent.
     
     Args:
-        query: The user's specific query (e.g. "Error 505", "Policy 1.2")
+        query: The user's specific query.
+        max_chunk_chars: Max characters to return before using a pointer.
         
     Returns:
         Dictionary containing ranked list of exact matches.
@@ -40,21 +41,25 @@ def lookup_exact(query: str) -> Dict[str, Any]:
 
     app.logger.info(f"DKR Exact Lookup: {query}")
     
-    # Get routing trace for explainability
     trace = toc_agent.get_routing_trace(query)
-    
-    # Get ranked results
     ranked_sections = toc_agent.route_query(query)
     
     results = []
     for file_id, section_id, score, metadata in ranked_sections:
-        # Only include high-scoring exact matches (heuristic threshold)
-        if score > 10.0:  # Threshold assumes text hits(2) + alias hits(3)
+        if score > 10.0:
+            content = metadata.get('text', '')
+            
+            # --- POINTER LOGIC START ---
+            if len(content) > max_chunk_chars:
+                snippet = content[:max_chunk_chars]
+                content = f"{snippet}\n... [TRUNCATED. Full content in {file_id}#{section_id}]"
+            # --- POINTER LOGIC END ---
+
             results.append({
                 "file_id": file_id,
                 "section_id": section_id,
                 "score": score,
-                "content": metadata.get('text', ''),
+                "content": content,
                 "source": f"DKR:{file_id}#{section_id}"
             })
             
@@ -66,23 +71,12 @@ def lookup_exact(query: str) -> Dict[str, Any]:
 
 @app.tool(output="status")
 def init_agent(dkr_path: str, corpus_path: str) -> Dict[str, str]:
-    """
-    Initialize the DKR Agent.
-    
-    Args:
-        dkr_path: Path to the root of the DKR repository.
-        corpus_path: Path to the JSONL corpus directory.
-    """
     global toc_agent
     try:
         TOCAgent, DataLoader = load_dkr_modules(dkr_path)
-        
-        # Load Data
         loader = DataLoader(corpus_path)
         toc = loader.toc
         sections = loader.sections
-        
-        # Initialize Agent
         toc_agent = TOCAgent(toc, sections)
         app.logger.info(f"DKR Agent initialized with {len(sections)} sections")
         return {"status": "initialized", "sections_loaded": str(len(sections))}

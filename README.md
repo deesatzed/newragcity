@@ -81,5 +81,14 @@ Execute the pipeline:
 python scripts/run_eval.py
 ```
 
-## 🧪 Testing
-We include a "Golden Set" validator to ensure SOTA performance.
+## ⚙️ Configuration
+
+### Context Management (Pointers)
+To prevent overflowing the LLM with massive documents, The Vault truncates long sections and provides a pointer (Source ID) instead.
+
+*   **Setting:** `max_chunk_chars`
+*   **Location:** `servers/dkr/parameter.yaml` and `servers/ersatz/parameter.yaml`
+*   **Default:** `2000` characters.
+
+If a document exceeds this limit, the LLM will see:
+`... [TRUNCATED. Full content in File_ID#Section]`
