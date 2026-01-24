@@ -204,10 +204,43 @@ def prompt_path(prompt: str, default: str) -> str:
         return default
     return os.path.expanduser(response)
 
-def install_dependencies(framework: str):
+def install_preliminary_dependencies(debug: bool = False) -> bool:
+    """Install minimal dependencies needed for setup script to run."""
+    print_info("Installing preliminary dependencies...")
+    print_info("This will install basic tools: fastmcp, PyYAML, requests")
+
+    prelim_packages = ['fastmcp>=2.14.4', 'pyyaml', 'requests']
+
+    if debug:
+        print(f"  Debug: Installing packages: {', '.join(prelim_packages)}")
+
+    returncode, stdout, stderr = run_command([
+        sys.executable, '-m', 'pip', 'install', '--quiet'
+    ] + prelim_packages, check=False)
+
+    if returncode != 0:
+        print_error(f"Failed to install preliminary dependencies: {stderr}")
+        return False
+
+    print_success("Preliminary dependencies installed")
+    return True
+
+def install_dependencies(framework: str, debug: bool = False):
     """Install all dependencies (full setup)."""
     print_info("Installing full setup (includes training dependencies)...")
     print_info("This may take 10-30 minutes depending on your connection.")
+
+    install_steps = [
+        "Installing core dependencies (PyTorch, Transformers, etc.)",
+        "Installing training tools (DeepSpeed, accelerate)",
+        f"Installing {framework}-specific packages"
+    ]
+
+    if debug:
+        print("\n  Debug: Installation checklist:")
+        for i, step in enumerate(install_steps, 1):
+            print(f"  [{i}/{len(install_steps)}] {step}")
+        print()
 
     # Check for uv
     returncode, _, _ = run_command(['uv', '--version'], check=False)
@@ -215,12 +248,17 @@ def install_dependencies(framework: str):
 
     if has_uv:
         print_info("Using uv for fast installation...")
+        if debug:
+            print("  Debug: Running 'uv sync --all-extras'")
         returncode, stdout, stderr = run_command(['uv', 'sync', '--all-extras'], check=False)
         if returncode != 0:
             print_warning("uv sync failed, falling back to pip...")
             has_uv = False
 
     if not has_uv:
+        if debug:
+            print("  Debug: Using pip for installation")
+            print(f"  Debug: Running 'pip install -r requirements.txt'")
         print_info("Using pip for installation...")
         returncode, stdout, stderr = run_command([
             sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'
@@ -239,6 +277,8 @@ def install_dependencies(framework: str):
 
     if framework in framework_deps and framework_deps[framework]:
         print_info(f"Installing {framework}-specific packages...")
+        if debug:
+            print(f"  Debug: Installing {', '.join(framework_deps[framework])}")
         returncode, stdout, stderr = run_command([
             sys.executable, '-m', 'pip', 'install'
         ] + framework_deps[framework], check=False)
@@ -368,24 +408,73 @@ After adding, restart Claude Desktop. You'll see RoT tools available in the chat
     print(f"""
 Your data folder: {Colors.CYAN}{data_folder}{Colors.RESET}
 
-Place your documents in this folder:
-  - PDFs, text files, markdown, etc.
-  - Images for multimodal analysis
-  - Structured data (JSON, CSV)
+Supported document types:
+  {Colors.GREEN}✓ Text Documents{Colors.RESET}: .txt, .md, .markdown, .rst
+  {Colors.GREEN}✓ PDF Documents{Colors.RESET}: .pdf (with text extraction)
+  {Colors.GREEN}✓ Office Documents{Colors.RESET}: .docx, .doc, .rtf
+  {Colors.GREEN}✓ Images{Colors.RESET}: .png, .jpg, .jpeg, .webp (multimodal analysis)
+  {Colors.GREEN}✓ Structured Data{Colors.RESET}: .json, .jsonl, .csv
 
-The RoT server will automatically compress and reason over these documents.
+Data folder location:
+  Absolute path: {Colors.CYAN}{Path(data_folder).absolute()}{Colors.RESET}
+
+To use your data:
+  1. Copy documents to the data folder
+  2. RoT will automatically index and compress them
+  3. Query via Claude Desktop or Python API
+  4. Documents are processed with 3-4× compression for efficiency
 """)
 
-    print_step(3, "Using with Other Chatbots")
-    print("""
-RoT is an MCP server, which works with:
+    print_step(3, "Using with Chatbots (REST API)")
+    print(f"""
+RoT is an MCP server, but can be wrapped as a REST API for chatbot integration.
+
+{Colors.YELLOW}Quick REST API wrapper example:{Colors.RESET}
+
+Create {Colors.CYAN}rest_api_wrapper.py{Colors.RESET}:
+
+{Colors.BLUE}
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import sys
+sys.path.insert(0, "src")
+from rot_reasoning import _assess_complexity_impl, get_rot_compressor
+
+app = FastAPI(title="RoT Reasoning API")
+
+class QueryRequest(BaseModel):
+    query: str
+    context: list[str]
+    max_tokens: int = 256
+
+@app.post("/compress_and_generate")
+async def compress_and_generate(req: QueryRequest):
+    try:
+        compressor = get_rot_compressor()
+        result = await compressor.compress_and_generate(
+            prompt=req.query,
+            compressed_state=None,
+            max_tokens=req.max_tokens
+        )
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/assess_complexity")
+def assess_complexity(req: QueryRequest):
+    return _assess_complexity_impl(req.query, req.context)
+
+# Run: uvicorn rest_api_wrapper:app --reload --port 8000
+{Colors.RESET}
+
+Then integrate with your chatbot:
+  {Colors.CYAN}POST http://localhost:8000/compress_and_generate{Colors.RESET}
+  {Colors.CYAN}POST http://localhost:8000/assess_complexity{Colors.RESET}
+
+For direct MCP integration:
   - Claude Desktop (native MCP support)
   - Any MCP-compatible client
-  - Custom integrations (see examples/example_usage.py)
-
-For chatbots without MCP support, you can:
-  - Use the Python API directly (see examples/)
-  - Wrap it as a REST API (see docs/API_INTEGRATION.md)
+  - Python API (see examples/example_usage.py)
 """)
 
     print_step(4, "Testing and Examples")
@@ -416,10 +505,16 @@ Documentation:
 
     print(f"\n{Colors.BOLD}Happy reasoning! 🧠{Colors.RESET}\n")
 
-def main():
+def main(debug: bool = False):
     """Main setup workflow."""
     print_header("Welcome to RoT Reasoning Server Setup!")
     print("This interactive setup will guide you through installation.\n")
+
+    # Step 0: Preliminary Installation (before questions)
+    print_step(0, "Preliminary Setup")
+    if not install_preliminary_dependencies(debug):
+        print_error("Preliminary installation failed")
+        sys.exit(1)
 
     # Step 1: System Check
     print_step(1, "System Check")
@@ -522,19 +617,35 @@ def main():
     print_step(4, "Data Folder Configuration")
     default_data_folder = str(Path.cwd() / 'data')
     print_info(f"Default data folder: {default_data_folder}")
+    print_info("This folder will store your documents for RoT processing")
 
-    if prompt_yes_no("Is this location okay for your documents?", default=True):
+    print("\nSupported document types:")
+    print(f"  {Colors.GREEN}✓{Colors.RESET} Text: .txt, .md, .markdown, .rst")
+    print(f"  {Colors.GREEN}✓{Colors.RESET} PDF: .pdf (with text extraction)")
+    print(f"  {Colors.GREEN}✓{Colors.RESET} Office: .docx, .doc, .rtf")
+    print(f"  {Colors.GREEN}✓{Colors.RESET} Images: .png, .jpg, .jpeg, .webp (multimodal)")
+    print(f"  {Colors.GREEN}✓{Colors.RESET} Data: .json, .jsonl, .csv")
+
+    if prompt_yes_no("\nIs this location okay for your documents?", default=True):
         data_folder = default_data_folder
     else:
         data_folder = prompt_path("Enter your data folder path", default_data_folder)
 
     # Create data folder if it doesn't exist
-    Path(data_folder).mkdir(parents=True, exist_ok=True)
-    print_success(f"Data folder: {data_folder}")
+    data_path = Path(data_folder)
+    data_path.mkdir(parents=True, exist_ok=True)
+    print_success(f"Data folder created: {data_path.absolute()}")
+
+    # Check if folder has any files
+    existing_files = list(data_path.glob('*'))
+    if existing_files:
+        print_info(f"Found {len(existing_files)} existing file(s) in data folder")
+    else:
+        print_info("Data folder is empty. Add documents to get started!")
 
     # Step 5: Full Installation
     print_step(5, "Installation (Full Setup)")
-    if not install_dependencies(framework):
+    if not install_dependencies(framework, debug):
         print_error("Installation failed")
         sys.exit(1)
 
@@ -555,8 +666,13 @@ def main():
     print_success("Setup complete!")
 
 if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description='RoT Reasoning Server Setup')
+    parser.add_argument('--debug', action='store_true', help='Enable debug mode with detailed logs')
+    args = parser.parse_args()
+
     try:
-        main()
+        main(debug=args.debug)
     except KeyboardInterrupt:
         print(f"\n\n{Colors.YELLOW}Setup cancelled by user{Colors.RESET}")
         sys.exit(0)
