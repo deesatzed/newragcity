@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  rot-reasoning:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rot-reasoning-server:latest
+    container_name: rot-reasoning-server
+
+    # GPU support (requires nvidia-docker2)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    # Environment variables
+    environment:
+      - DEVICE=cuda
+      - DTYPE=bfloat16
+      - HF_HOME=/app/.cache/huggingface
+      - TRANSFORMERS_CACHE=/app/.cache/huggingface
+
+    # Volume mounts
+    volumes:
+      # Checkpoints (persistent)
+      - ./checkpoints:/app/checkpoints
+      # HuggingFace cache (persistent)
+      - huggingface-cache:/app/.cache/huggingface
+      # Configuration (optional override)
+      - ./parameter.yaml:/app/parameter.yaml:ro
+
+    # Port mapping
+    ports:
+      - "8000:8000"
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Command override (uncomment one)
+    command: ["python", "src/rot_reasoning.py", "--test"]
+    # command: ["python", "src/rot_reasoning.py", "--port", "8000"]
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import fastmcp; print('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  # Persistent HuggingFace cache
+  huggingface-cache:
+    driver: local
+
+# Networks (optional)
+networks:
+  default:
+    name: ultrarag-network

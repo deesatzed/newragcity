@@ -1,0 +1,64 @@
+# servers/rot_reasoning/parameter.yaml
+# Configuration for RoT (Render-of-Thought) Reasoning Server
+
+# Model checkpoints (update these paths after training)
+checkpoint_path: "servers/rot_reasoning/checkpoints/stage2/checkpoint_step_16000"
+stage1_checkpoint: "servers/rot_reasoning/checkpoints/stage1/checkpoint_epoch_2"
+
+# Base models
+# Note: Update these paths to match your local model locations
+ocr_model_path: "DeepSeek-OCR/ocr_model"
+llm_model_path: "ckpt/base/Qwen3-VL-4B-Instruct"
+
+# Device configuration
+device: "cuda"  # or "cpu" if no GPU available
+dtype: "bfloat16"  # or "float16", "float32"
+gpu_ids: "0,1"
+
+# Rendering configuration
+image_size: 512
+font_size: 16
+background_color: "white"
+text_color: "black"
+
+# Model architecture
+projection_hidden_dim: 2048
+use_custom_llm: true
+
+# Training configuration (used during training, not inference)
+enable_lora: false
+full_finetuning: false
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target_modules:
+  - "q_proj"
+  - "k_proj"
+  - "v_proj"
+  - "o_proj"
+
+# Generation parameters (defaults, can be overridden in pipeline)
+max_tokens: 256
+temperature: 0.7
+top_p: 0.8
+compression_ratio: 3.5  # Target (informational, model is pre-trained)
+
+# Performance
+batch_size: 8
+use_vllm: false  # Use vLLM for accelerated inference (optional)
+
+# Reasoning configuration
+max_reasoning_steps: 10
+enable_visual_trace: true  # Save reasoning images for debugging
+adaptive_compression: true  # Adjust compression based on complexity
+
+# Monitoring
+log_compression_metrics: true
+log_token_usage: true
+
+# Training instructions (for reference)
+# To train the RoT model:
+# 1. cd /Volumes/WS4TB/RoT-main
+# 2. bash run_train_stage1.sh --num_gpus 2 --dataset gsm8kaug
+# 3. bash run_train_stage2.sh --num_gpus 2 --stage1_checkpoint checkpoints/stage1/checkpoint_epoch_2
+# 4. Copy checkpoints to this server's checkpoints/ directory

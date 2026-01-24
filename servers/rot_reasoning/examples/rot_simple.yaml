@@ -1,0 +1,44 @@
+# Simple RoT Compressed Reasoning Example
+# This demonstrates basic usage of the RoT reasoning server
+
+servers:
+  benchmark: servers/benchmark
+  retriever: servers/retriever
+  rot_reasoning: servers/rot_reasoning
+  prompt: servers/prompt
+  evaluation: servers/evaluation
+
+pipeline:
+  # Load benchmark data
+  - benchmark.get_data:
+      input:
+        dataset_name: "gsm8k"
+
+  # Initialize retriever
+  - retriever.retriever_init
+
+  # Retrieve relevant context
+  - retriever.retriever_search
+
+  # Format prompt for RAG
+  - prompt.qa_rag_boxed
+
+  # Generate with RoT compression (replaces standard generation.generate)
+  - rot_reasoning.compress_and_generate:
+      input:
+        prompt_ls: prompt_ls
+        compression_ratio: 3.5
+        max_tokens: 256
+        temperature: 0.7
+      output:
+        ans_ls: answers
+        compressed_states: reasoning_states
+        token_savings: total_token_savings
+
+  # Evaluate results
+  - evaluation.evaluate
+
+# Expected output:
+# - Answers with compressed reasoning
+# - Token savings metrics (target: 70-75% reduction)
+# - Compression ratios per query

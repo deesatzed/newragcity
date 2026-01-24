@@ -1,0 +1,70 @@
+# Adaptive Compression Based on Query Complexity
+# Demonstrates branching logic to adaptively apply compression
+
+servers:
+  benchmark: servers/benchmark
+  retriever: servers/retriever
+  rot_reasoning: servers/rot_reasoning
+  generation: servers/generation  # Standard generation for simple queries
+  prompt: servers/prompt
+  custom: servers/custom
+  router: servers/router
+  evaluation: servers/evaluation
+
+pipeline:
+  # Load data
+  - benchmark.get_data:
+      input:
+        dataset_name: "gsm8k"
+
+  # Initialize retriever
+  - retriever.retriever_init
+
+  # Retrieve context
+  - retriever.retriever_search
+
+  # Assess query complexity
+  - rot_reasoning.assess_complexity:
+      input:
+        query: q_ls
+        context: ret_psg
+        complexity_threshold: 0.5
+      output:
+        complexity: query_complexity
+        recommended_compression: compression_ratio
+        recommended_max_steps: max_steps
+
+  # Format prompt
+  - prompt.qa_rag_boxed
+
+  # Branch based on complexity
+  - branch:
+      router:
+        - router.check_model_state  # Route by complexity score
+      branches:
+        simple:  # Low complexity - skip compression overhead
+          - generation.generation_init
+          - generation.generate:
+              input:
+                prompt_ls: prompt_ls
+                max_tokens: 128
+              output:
+                ans_ls: answers
+
+        complex:  # High complexity - use full RoT compression
+          - rot_reasoning.compress_and_generate:
+              input:
+                prompt_ls: prompt_ls
+                compression_ratio: compression_ratio  # Dynamic from assess_complexity
+                max_tokens: 256
+              output:
+                ans_ls: answers
+                token_savings: savings
+
+  # Evaluate
+  - evaluation.evaluate
+
+# Expected output:
+# - Simple queries: Fast generation without compression overhead
+# - Complex queries: Compressed reasoning with token savings
+# - Adaptive strategy based on query characteristics

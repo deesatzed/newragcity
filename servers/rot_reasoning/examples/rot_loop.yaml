@@ -1,0 +1,65 @@
+# Multi-Step Reasoning with State Carryover
+# Demonstrates loop-based iterative reasoning with compressed state
+
+servers:
+  benchmark: servers/benchmark
+  retriever: servers/retriever
+  rot_reasoning: servers/rot_reasoning
+  prompt: servers/prompt
+  custom: servers/custom
+  evaluation: servers/evaluation
+
+pipeline:
+  # Load data
+  - benchmark.get_data:
+      input:
+        dataset_name: "gsm8k"
+
+  # Initialize retriever
+  - retriever.retriever_init
+
+  # Initial retrieval
+  - retriever.retriever_search
+
+  # Compressed iterative reasoning (state carries across iterations)
+  - loop:
+      times: 5
+      steps:
+        # Generate sub-question
+        - prompt.gen_subq
+
+        # Generate with compression (carries previous reasoning)
+        - rot_reasoning.compress_and_generate:
+            input:
+              prompt_ls: subq_prompts
+              compressed_state: reasoning_state  # Previous iteration state
+              max_tokens: 150
+              temperature: 0.7
+            output:
+              ans_ls: subq_answers
+              compressed_states: reasoning_state  # Updated for next iteration
+              token_savings: iteration_savings
+
+        # Retrieve for next iteration
+        - retriever.retriever_search:
+            input:
+              query_list: subq_answers
+            output:
+              ret_psg: temp_psg
+
+        # Merge passages
+        - custom.merge_passages
+
+  # Final answer generation with all accumulated reasoning
+  - prompt.qa_rag_boxed
+  - rot_reasoning.compress_and_generate:
+      output:
+        ans_ls: final_answers
+
+  # Evaluate
+  - evaluation.evaluate
+
+# Expected output:
+# - Iterative reasoning with state carryover
+# - Cumulative token savings across iterations
+# - More sophisticated answers from multi-step reasoning
