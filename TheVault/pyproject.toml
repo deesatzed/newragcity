@@ -1,0 +1,21 @@
+[project]
+name = "the-vault"
+version = "0.1.0"
+description = "SOTA Local Proprietary Retrieval System"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ultrarag>=0.3.0",
+    "fastmcp>=2.0.0",
+    "python-dotenv",
+    "rich",
+    "typer",
+    "pymupdf",
+    "tqdm"
+]
+
+[tool.uv]
+package = true
+
+[tool.setuptools.packages.find]
+where = ["."]

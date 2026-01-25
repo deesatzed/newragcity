@@ -1,0 +1,17 @@
+agno
+openai
+pydantic>=1.10
+lancedb
+fastapi
+uvicorn
+python-dotenv
+
+# Optional LLM dependencies (install only what you need)
+# For OpenAI GPT models:
+# pip install openai
+#
+# For Anthropic Claude:
+# pip install anthropic
+#
+# For local Ollama:
+# pip install requests

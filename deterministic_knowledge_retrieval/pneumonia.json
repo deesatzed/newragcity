@@ -1,0 +1,506 @@
+{
+  "documentInfo": {
+    "title": "TUH-Inc. Empiric Antimicrobial Therapy Recommendations for Common Infections in Hospitalized Adults",
+    "system": "TUH-Inc.",
+    "versionDate": "2025-04-02",
+    "sourceFile": "ATTCHMENT A_Inpatient Empiric antimicrobial Recommendations for common infections_ver 2025-04-02_shared with ED.docx"
+  },
+  "infections": [
+    {
+      "id": "pneumonia",
+      "name": "Pneumonia (PNA)",
+      "diagnostics": {
+        "orders": [
+          "MRSA nares swab (if vancomycin is started)",
+          "Sputum cultures (if covering for MRSA or Pseudomonas)"
+        ],
+        "timing": null,
+        "deescalationRules": [
+          "Negative MRSA nares swab has a >95% negative predictive value for MRSA PNA.",
+          "If no microbiologic confirmation of MRSA or PSA, discontinue extended coverage."
+        ]
+      },
+      "pathways": [
+        {
+          "label": "Community-Acquired Pneumonia (CAP)",
+          "eligibilityCriteria": {
+            "riskFlags": [],
+            "clinicalState": [],
+            "setting": "Community-Acquired"
+          },
+          "duration": {
+            "minDays": 5,
+            "maxDays": null,
+            "notes": [
+              "Longer duration may be needed if: Severe CAP, Empyema, Complicated by extra-pulmonary infection."
+            ]
+          },
+          "stopRules": [
+            "Discontinue azithromycin at 3 days if dosed 500mg daily, or at 5 days if using a step-down regimen, regardless of total antibiotic duration."
+          ],
+          "procedureRecommendations": [],
+          "consults": [
+            "Consider ID consult if no clinical improvement past the expected duration.",
+            "Discuss empiric regimen with ID if patient has a history of resistant organisms."
+          ],
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": [
+                "none"
+              ],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [
+                    {
+                      "name": "ceftriaxone",
+                      "routes": ["IV"],
+                      "variants": [
+                        {
+                          "label": "Standard dose",
+                          "dosingByRenalFunction": [
+                            {"renalCategory": "gt_50", "dose": "1-2g", "frequency": "q24h"},
+                            {"renalCategory": "50_30", "dose": "1-2g", "frequency": "q24h"},
+                            {"renalCategory": "29_10", "dose": "1-2g", "frequency": "q24h"},
+                            {"renalCategory": "lt_10_no_hd", "dose": "1-2g", "frequency": "q24h"},
+                            {"renalCategory": "hd", "dose": "1-2g", "frequency": "q24h AD"},
+                            {"renalCategory": "crrt", "dose": "2g", "frequency": "q24h", "dataQuality": {"renalBin": "limited"}}
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "azithromycin",
+                      "routes": ["IV", "PO"],
+                      "variants": [{
+                        "label": "Standard dose",
+                        "variantNotes": {"notes": ["3-day regimen: 500mg q24h. 5-day regimen: 500mg q24h x1 day, then 250mg q24h x4 days."]},
+                        "dosingByRenalFunction": [
+                          {"renalCategory": "gt_50", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "50_30", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "29_10", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "lt_10_no_hd", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "hd", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "crrt", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]}
+                        ]
+                      }]
+                    }
+                  ],
+                  "conditionalAdjuncts": [
+                    {
+                      "condition": "ICU admission, History of MRSA in the last 12 months, Suspected lung abscess/empyema/septic emboli, or Influenza/RSV diagnosis in the last 14 days",
+                      "drugs": [
+                        {
+                          "name": "vancomycin",
+                          "routes": ["IV"],
+                          "variants": [{
+                            "label": "Standard Dosing",
+                            "weightBasis": "TBW",
+                            "loadingDose": {
+                              "dose": "20-25 mg/kg",
+                              "instructions": "Administer a one-time loading dose (max 2500 mg) if no vancomycin in last 24h. Do not withhold for renal function. Use 25 mg/kg for ICU/sepsis/ECMO/augmented renal clearance."
+                            }
+                          }]
+                        }
+                      ]
+                    }
+                  ],
+                  "notes": ["Doxycycline IV/PO if contraindication to azithromycin."]
+                },
+                {
+                  "rank": 2,
+                  "primaryDrugs": [
+                    {
+                      "name": "ampicillin-sulbactam",
+                      "routes": ["IV"],
+                      "variants": [
+                        {
+                          "label": "Standard dose",
+                          "dosingByRenalFunction": [
+                            {"renalCategory": "gt_50", "doseOptions": [{"dose": "1.5-3g", "frequency": "q6h"}, {"dose": "3g", "frequency": "q8h"}]},
+                            {"renalCategory": "50_30", "dose": "1.5g", "frequency": "q6h"},
+                            {"renalCategory": "29_10", "dose": "1.5-3g", "frequency": "q12h"},
+                            {"renalCategory": "lt_10_no_hd", "dose": "1.5-3g", "frequency": "q24h"},
+                            {"renalCategory": "hd", "doseOptions": [{"dose": "1.5g", "frequency": "q12h AD"}, {"dose": "3g", "frequency": "q24h AD"}]},
+                            {"renalCategory": "crrt", "dose": "1.5-3g", "frequency": "q8h", "dataQuality": {"renalBin": "limited"}}
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "azithromycin",
+                      "routes": ["IV", "PO"],
+                      "variants": [{
+                        "label": "Standard dose",
+                        "variantNotes": {"notes": ["3-day regimen: 500mg q24h. 5-day regimen: 500mg q24h x1 day, then 250mg q24h x4 days."]},
+                        "dosingByRenalFunction": [
+                          {"renalCategory": "gt_50", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "50_30", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "29_10", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "lt_10_no_hd", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "hd", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "crrt", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]}
+                        ]
+                      }]
+                    }
+                  ],
+                  "conditionalAdjuncts": [
+                    {
+                      "condition": "ICU admission, History of MRSA in the last 12 months, Suspected lung abscess/empyema/septic emboli, or Influenza/RSV diagnosis in the last 14 days",
+                      "drugs": [
+                        {
+                          "name": "vancomycin",
+                          "routes": ["IV"],
+                          "variants": [{
+                            "label": "Standard Dosing",
+                            "weightBasis": "TBW",
+                            "loadingDose": {
+                              "dose": "20-25 mg/kg",
+                              "instructions": "Administer a one-time loading dose (max 2500 mg) if no vancomycin in last 24h. Do not withhold for renal function. Use 25 mg/kg for ICU/sepsis/ECMO/augmented renal clearance."
+                            }
+                          }]
+                        }
+                      ]
+                    }
+                  ],
+                  "notes": ["Preferred if aspiration related empyema or lung abscess suspected.", "Doxycycline IV/PO if contraindication to azithromycin."]
+                }
+              ]
+            },
+            {
+              "allergyProfile": [
+                "pcn_mild_rash"
+              ],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [
+                    {
+                      "name": "ceftriaxone",
+                      "routes": ["IV"],
+                      "variants": [
+                        {
+                          "label": "Standard dose",
+                          "dosingByRenalFunction": [
+                            {"renalCategory": "gt_50", "dose": "1-2g", "frequency": "q24h"},
+                            {"renalCategory": "50_30", "dose": "1-2g", "frequency": "q24h"},
+                            {"renalCategory": "29_10", "dose": "1-2g", "frequency": "q24h"},
+                            {"renalCategory": "lt_10_no_hd", "dose": "1-2g", "frequency": "q24h"},
+                            {"renalCategory": "hd", "dose": "1-2g", "frequency": "q24h AD"},
+                            {"renalCategory": "crrt", "dose": "2g", "frequency": "q24h", "dataQuality": {"renalBin": "limited"}}
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "azithromycin",
+                      "routes": ["IV", "PO"],
+                      "variants": [{
+                        "label": "Standard dose",
+                        "variantNotes": {"notes": ["3-day regimen: 500mg q24h. 5-day regimen: 500mg q24h x1 day, then 250mg q24h x4 days."]},
+                        "dosingByRenalFunction": [
+                          {"renalCategory": "gt_50", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "50_30", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "29_10", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "lt_10_no_hd", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "hd", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]},
+                          {"renalCategory": "crrt", "dose": "250-500mg", "frequency": "q24h", "additionalNotes": ["NO RENAL ADJUSTMENT NECESSARY (NOT dialyzed)"]}
+                        ]
+                      }]
+                    }
+                  ],
+                  "conditionalAdjuncts": [
+                    {
+                      "condition": "Aspiration related empyema or lung abscess suspected",
+                      "drugs": [
+                        {
+                          "name": "metronidazole",
+                          "routes": ["IV", "PO"],
+                          "variants": [
+                            {"label": "General anaerobic", "dose": "500mg", "frequency": "q12h"},
+                            {"label": "C. difficile/CNS", "dose": "500mg", "frequency": "q8h"}
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "ICU admission, History of MRSA in the last 12 months, Suspected lung abscess/empyema/septic emboli, or Influenza/RSV diagnosis in the last 14 days",
+                      "drugs": [
+                        {
+                          "name": "vancomycin",
+                          "routes": ["IV"],
+                          "variants": [{
+                            "label": "Standard Dosing",
+                            "weightBasis": "TBW",
+                            "loadingDose": {
+                              "dose": "20-25 mg/kg",
+                              "instructions": "Administer a one-time loading dose (max 2500 mg) if no vancomycin in last 24h. Do not withhold for renal function. Use 25 mg/kg for ICU/sepsis/ECMO/augmented renal clearance."
+                            }
+                          }]
+                        }
+                      ]
+                    }
+                  ],
+                  "notes": ["Doxycycline IV/PO if contraindication to azithromycin."]
+                }
+              ]
+            },
+            {
+              "allergyProfile": [
+                "pcn_severe_anaphylaxis"
+              ],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [
+                    {
+                      "name": "levofloxacin",
+                      "routes": ["IV", "PO"],
+                      "variants": [
+                        {"label": "750mg based regimen"},
+                        {"label": "500mg based regimen"},
+                        {"label": "250mg based regimen"}
+                      ]
+                    }
+                  ],
+                  "conditionalAdjuncts": [
+                    {
+                      "condition": "ICU admission, History of MRSA in the last 12 months, Suspected lung abscess/empyema/septic emboli, or Influenza/RSV diagnosis in the last 14 days",
+                      "drugs": [
+                        {
+                          "name": "vancomycin",
+                          "routes": ["IV"],
+                          "variants": [{
+                            "label": "Standard Dosing",
+                            "weightBasis": "TBW",
+                            "loadingDose": {
+                              "dose": "20-25 mg/kg",
+                              "instructions": "Administer a one-time loading dose (max 2500 mg) if no vancomycin in last 24h. Do not withhold for renal function. Use 25 mg/kg for ICU/sepsis/ECMO/augmented renal clearance."
+                            }
+                          }]
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "ICU admission",
+                      "drugs": [
+                        {
+                          "name": "aztreonam",
+                          "routes": ["IV"],
+                          "variants": [
+                            {"label": "Mild to moderate infections"},
+                            {"label": "Serious systemic infections"},
+                            {"label": "Meningitis"}
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "condition": "Aspiration related empyema or lung abscess suspected",
+                      "drugs": [
+                        {
+                          "name": "metronidazole",
+                          "routes": ["IV", "PO"],
+                          "variants": [
+                            {"label": "General anaerobic", "dose": "500mg", "frequency": "q12h"},
+                            {"label": "C. difficile/CNS", "dose": "500mg", "frequency": "q8h"}
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "HAP/VAP/CAP with MDRO Risk Factors",
+          "eligibilityCriteria": {
+            "riskFlags": [
+              "History of Pseudomonas or other MDRO in the last year",
+              "IV antibiotic use within last 90 days",
+              "Prolonged mechanical ventilation/tracheostomy",
+              "Immunocompromised",
+              "Advanced/end stage structural lung disease"
+            ],
+            "clinicalState": [],
+            "setting": "Hospital-Acquired"
+          },
+          "duration": {
+            "minDays": 5,
+            "maxDays": 7,
+            "notes": [
+              "CAP: 5 days",
+              "HAP/VAP: 5-7 days",
+              "Ultra short course (≤3 days) can be considered in patients with suspected VAP but minimal and stable ventilator settings (PEEP ≤5 cm H2O and FiO2 ≤40%)."
+            ]
+          },
+          "stopRules": [
+            "Discontinue azithromycin at 3 days if dosed 500mg daily, or at 5 days if using a step-down regimen, regardless of total antibiotic duration."
+          ],
+          "procedureRecommendations": [],
+          "consults": [
+            "Discuss empiric regimen with ID if patient has a history of resistant organisms."
+          ],
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": [
+                "none"
+              ],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [
+                    {
+                      "name": "cefepime",
+                      "routes": ["IV"],
+                      "variants": [
+                        {
+                          "label": "Neutropenic fever/CNS infections",
+                          "infusion": {"infuseMinutes": 30},
+                          "dosingByRenalFunction": [
+                            {"renalCategory": "gt_50", "dose": "2g", "frequency": "q8h"},
+                            {"renalCategory": "50_30", "dose": "2g", "frequency": "q12h"},
+                            {"renalCategory": "29_10", "dose": "2g", "frequency": "q24h"},
+                            {"renalCategory": "lt_10_no_hd", "dose": "1g", "frequency": "q24h"},
+                            {"renalCategory": "hd", "doseOptions": [{"dose": "1g", "frequency": "q24h AD"}, {"dose": "2g", "frequency": "after each HD"}]},
+                            {"renalCategory": "crrt", "dose": "2g", "frequency": "q12h", "dataQuality": {"renalBin": "limited"}}
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "primaryDrugs": [
+                    {
+                      "name": "piperacillin-tazobactam",
+                      "routes": ["IV"],
+                      "variants": [
+                        {
+                          "label": "Extended infusion",
+                          "loadingDose": {"dose": "4.5gm", "infuseMinutes": 30},
+                          "infusion": {"type": "extended", "infuseMinutes": 240},
+                          "dosingByRenalFunction": [
+                            {"renalCategory": "gt_50", "dose": "3.375g", "frequency": "q8h"},
+                            {"renalCategory": "50_30", "dose": "3.375g", "frequency": "q8h"},
+                            {"renalCategory": "29_10", "dose": "3.375g", "frequency": "q8h"},
+                            {"renalCategory": "lt_10_no_hd", "additionalNotes": ["Refer to HD dosing"]},
+                            {"renalCategory": "hd", "dose": "4.5g", "frequency": "q12h", "infusion": {"infuseMinutes": 30}},
+                            {"renalCategory": "crrt", "dose": "4.5g", "frequency": "q8h", "infusion": {"infuseMinutes": 30}}
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "notes": ["Preferred in aspiration related empyema or lung abscess suspected"]
+                }
+              ],
+              "conditionalAdjuncts": [
+                {"condition": "CAP", "drugs": [{"name": "azithromycin"}]},
+                {"condition": "HAP/VAP, ICU admission, History of MRSA in the last 12 months, Suspected lung abscess/empyema/septic emboli, or Influenza/RSV diagnosis in the last 14 days", "drugs": [{"name": "vancomycin"}]}
+              ],
+              "oneTimeDoses": [
+                {
+                  "condition": "Septic shock",
+                  "drug": {
+                    "name": "tobramycin"
+                  },
+                  "doseNote": "5mg/kg (IBW) x 1 dose, or 2mg/kg (IBW) if HD or CrCl <20"
+                }
+              ]
+            },
+            {
+              "allergyProfile": [
+                "pcn_mild_rash"
+              ],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [
+                    {
+                      "name": "cefepime",
+                      "routes": ["IV"],
+                      "variants": [
+                        {
+                          "label": "Neutropenic fever/CNS infections",
+                          "infusion": {"infuseMinutes": 30},
+                          "dosingByRenalFunction": [
+                            {"renalCategory": "gt_50", "dose": "2g", "frequency": "q8h"},
+                            {"renalCategory": "50_30", "dose": "2g", "frequency": "q12h"},
+                            {"renalCategory": "29_10", "dose": "2g", "frequency": "q24h"},
+                            {"renalCategory": "lt_10_no_hd", "dose": "1g", "frequency": "q24h"},
+                            {"renalCategory": "hd", "doseOptions": [{"dose": "1g", "frequency": "q24h AD"}, {"dose": "2g", "frequency": "after each HD"}]},
+                            {"renalCategory": "crrt", "dose": "2g", "frequency": "q12h", "dataQuality": {"renalBin": "limited"}}
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "conditionalAdjuncts": [
+                {"condition": "Aspiration related empyema or lung abscess suspected", "drugs": [{"name": "metronidazole"}]},
+                {"condition": "CAP", "drugs": [{"name": "azithromycin"}]},
+                {"condition": "HAP/VAP, ICU admission, History of MRSA in the last 12 months, Suspected lung abscess/empyema/septic emboli, or Influenza/RSV diagnosis in the last 14 days", "drugs": [{"name": "vancomycin"}]}
+              ],
+              "oneTimeDoses": [
+                {
+                  "condition": "Septic shock",
+                  "drug": {
+                    "name": "tobramycin"
+                  },
+                  "doseNote": "5mg/kg (IBW) x 1 dose, or 2mg/kg (IBW) if HD or CrCl <20"
+                }
+              ]
+            },
+            {
+              "allergyProfile": [
+                "pcn_severe_anaphylaxis"
+              ],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [
+                    {
+                      "name": "levofloxacin",
+                      "routes": ["IV", "PO"],
+                      "variants": [
+                        {"label": "750mg based regimen"},
+                        {"label": "500mg based regimen"},
+                        {"label": "250mg based regimen"}
+                      ]
+                    },
+                    {
+                      "name": "aztreonam",
+                      "routes": ["IV"],
+                      "variants": [
+                        {"label": "Serious systemic infections"},
+                        {"label": "Meningitis"}
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "conditionalAdjuncts": [
+                {"condition": "Aspiration related empyema or lung abscess suspected", "drugs": [{"name": "metronidazole"}]},
+                {"condition": "HAP/VAP, ICU admission, History of MRSA in the last 12 months, Suspected lung abscess/empyema/septic emboli, or Influenza/RSV diagnosis in the last 14 days", "drugs": [{"name": "vancomycin"}]}
+              ],
+              "oneTimeDoses": [
+                {
+                  "condition": "Septic shock",
+                  "drug": {
+                    "name": "tobramycin"
+                  },
+                  "doseNote": "5mg/kg (IBW) x 1 dose, or 2mg/kg (IBW) if HD or CrCl <20"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

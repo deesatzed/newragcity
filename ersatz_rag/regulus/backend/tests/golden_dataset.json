@@ -1,0 +1,455 @@
+{
+  "description": "Golden dataset with 50 policy questions and expected answers for Regulus accuracy testing (>90% requirement)",
+  "test_cases": [
+    {
+      "id": 1,
+      "question": "What is the maximum vacation time allowed per year?",
+      "expected_answer": "Employees are entitled to a maximum of 25 vacation days per calendar year.",
+      "expected_node_ids": ["vacation_policy_annual_limits"],
+      "expected_sources": ["employee_handbook.pdf"],
+      "expected_page_ranges": [[45, 46]],
+      "category": "time_off"
+    },
+    {
+      "id": 2,
+      "question": "What are the guidelines for employee conduct during meetings?",
+      "expected_answer": "Employees must maintain professional behavior, avoid interrupting others, and keep discussions relevant to agenda items.",
+      "expected_node_ids": ["conduct_meeting_guidelines"],
+      "expected_sources": ["conduct_policy.pdf"],
+      "expected_page_ranges": [[12, 14]],
+      "category": "conduct"
+    },
+    {
+      "id": 3,
+      "question": "How should confidential information be handled?",
+      "expected_answer": "Confidential information must be stored securely, shared only with authorized personnel, and never discussed in public areas.",
+      "expected_node_ids": ["confidentiality_handling_procedures"],
+      "expected_sources": ["security_policy.pdf"],
+      "expected_page_ranges": [[8, 11]],
+      "category": "security"
+    },
+    {
+      "id": 4,
+      "question": "What is the process for reporting workplace harassment?",
+      "expected_answer": "Report harassment immediately to HR or use the anonymous hotline. All reports will be investigated promptly and confidentially.",
+      "expected_node_ids": ["harassment_reporting_process"],
+      "expected_sources": ["hr_policies.pdf"],
+      "expected_page_ranges": [[23, 25]],
+      "category": "hr"
+    },
+    {
+      "id": 5,
+      "question": "What are the remote work eligibility requirements?",
+      "expected_answer": "Employees must have manager approval, maintain productivity standards, and have appropriate home office setup.",
+      "expected_node_ids": ["remote_work_eligibility"],
+      "expected_sources": ["remote_work_policy.pdf"],
+      "expected_page_ranges": [[3, 5]],
+      "category": "remote_work"
+    },
+    {
+      "id": 6,
+      "question": "How many sick days are provided annually?",
+      "expected_answer": "Employees receive 12 sick days per calendar year, which can be carried over up to 5 days to the next year.",
+      "expected_node_ids": ["sick_leave_allocation"],
+      "expected_sources": ["employee_handbook.pdf"],
+      "expected_page_ranges": [[47, 48]],
+      "category": "time_off"
+    },
+    {
+      "id": 7,
+      "question": "What is the dress code for client meetings?",
+      "expected_answer": "Business professional attire is required for all client meetings, including suits and appropriate footwear.",
+      "expected_node_ids": ["dress_code_client_meetings"],
+      "expected_sources": ["conduct_policy.pdf"],
+      "expected_page_ranges": [[18, 19]],
+      "category": "conduct"
+    },
+    {
+      "id": 8,
+      "question": "What are the data backup requirements?",
+      "expected_answer": "All critical data must be backed up daily to approved cloud storage with 30-day retention minimum.",
+      "expected_node_ids": ["data_backup_requirements"],
+      "expected_sources": ["it_security_policy.pdf"],
+      "expected_page_ranges": [[15, 17]],
+      "category": "security"
+    },
+    {
+      "id": 9,
+      "question": "How should expense reports be submitted?",
+      "expected_answer": "Expense reports must be submitted within 30 days with original receipts through the company portal.",
+      "expected_node_ids": ["expense_reporting_process"],
+      "expected_sources": ["finance_policy.pdf"],
+      "expected_page_ranges": [[6, 8]],
+      "category": "finance"
+    },
+    {
+      "id": 10,
+      "question": "What is the policy on personal use of company equipment?",
+      "expected_answer": "Limited personal use is permitted during breaks, but no personal software installation or inappropriate content access.",
+      "expected_node_ids": ["equipment_personal_use"],
+      "expected_sources": ["it_policy.pdf"],
+      "expected_page_ranges": [[22, 24]],
+      "category": "it_policy"
+    },
+    {
+      "id": 11,
+      "question": "What training is required for new employees?",
+      "expected_answer": "New employees must complete orientation, compliance training, and role-specific training within first 30 days.",
+      "expected_node_ids": ["new_employee_training"],
+      "expected_sources": ["training_policy.pdf"],
+      "expected_page_ranges": [[1, 4]],
+      "category": "training"
+    },
+    {
+      "id": 12,
+      "question": "How are performance reviews conducted?",
+      "expected_answer": "Performance reviews are conducted annually with mid-year check-ins using standardized evaluation criteria.",
+      "expected_node_ids": ["performance_review_process"],
+      "expected_sources": ["hr_policies.pdf"],
+      "expected_page_ranges": [[35, 38]],
+      "category": "hr"
+    },
+    {
+      "id": 13,
+      "question": "What is the social media policy for employees?",
+      "expected_answer": "Employees must not share confidential information and should include disclaimers when posting about work topics.",
+      "expected_node_ids": ["social_media_guidelines"],
+      "expected_sources": ["conduct_policy.pdf"],
+      "expected_page_ranges": [[28, 30]],
+      "category": "conduct"
+    },
+    {
+      "id": 14,
+      "question": "What are the requirements for overtime authorization?",
+      "expected_answer": "Overtime must be pre-approved by manager and documented in timekeeping system within 24 hours.",
+      "expected_node_ids": ["overtime_authorization"],
+      "expected_sources": ["payroll_policy.pdf"],
+      "expected_page_ranges": [[12, 14]],
+      "category": "payroll"
+    },
+    {
+      "id": 15,
+      "question": "How should workplace accidents be reported?",
+      "expected_answer": "Report accidents immediately to supervisor and safety officer, complete incident report within 24 hours.",
+      "expected_node_ids": ["accident_reporting_procedure"],
+      "expected_sources": ["safety_policy.pdf"],
+      "expected_page_ranges": [[19, 21]],
+      "category": "safety"
+    },
+    {
+      "id": 16,
+      "question": "What is the policy on professional development funding?",
+      "expected_answer": "Company provides up to $2000 annually for approved professional development with manager approval.",
+      "expected_node_ids": ["professional_development_funding"],
+      "expected_sources": ["training_policy.pdf"],
+      "expected_page_ranges": [[15, 17]],
+      "category": "training"
+    },
+    {
+      "id": 17,
+      "question": "What are the guidelines for email communication?",
+      "expected_answer": "Use professional tone, clear subject lines, and appropriate recipient lists. Avoid reply-all unless necessary.",
+      "expected_node_ids": ["email_communication_guidelines"],
+      "expected_sources": ["communication_policy.pdf"],
+      "expected_page_ranges": [[5, 7]],
+      "category": "communication"
+    },
+    {
+      "id": 18,
+      "question": "How long is the probationary period for new hires?",
+      "expected_answer": "New employees have a 90-day probationary period with evaluation at 30, 60, and 90 days.",
+      "expected_node_ids": ["probationary_period_duration"],
+      "expected_sources": ["employment_policy.pdf"],
+      "expected_page_ranges": [[8, 10]],
+      "category": "employment"
+    },
+    {
+      "id": 19,
+      "question": "What is the policy on confidentiality agreements?",
+      "expected_answer": "All employees must sign confidentiality agreements and annual renewals covering proprietary information protection.",
+      "expected_node_ids": ["confidentiality_agreement_policy"],
+      "expected_sources": ["legal_compliance.pdf"],
+      "expected_page_ranges": [[12, 15]],
+      "category": "legal"
+    },
+    {
+      "id": 20,
+      "question": "How should customer complaints be handled?",
+      "expected_answer": "Acknowledge within 24 hours, escalate to management if needed, and document resolution in CRM system.",
+      "expected_node_ids": ["customer_complaint_handling"],
+      "expected_sources": ["customer_service_policy.pdf"],
+      "expected_page_ranges": [[22, 25]],
+      "category": "customer_service"
+    },
+    {
+      "id": 21,
+      "question": "What are the requirements for travel expense reimbursement?",
+      "expected_answer": "Submit receipts within 30 days for pre-approved business travel with itemized expense report.",
+      "expected_node_ids": ["travel_expense_reimbursement"],
+      "expected_sources": ["travel_policy.pdf"],
+      "expected_page_ranges": [[18, 20]],
+      "category": "travel"
+    },
+    {
+      "id": 22,
+      "question": "What is the process for requesting time off?",
+      "expected_answer": "Submit requests at least 2 weeks in advance through HR portal with manager approval required.",
+      "expected_node_ids": ["time_off_request_process"],
+      "expected_sources": ["employee_handbook.pdf"],
+      "expected_page_ranges": [[42, 44]],
+      "category": "time_off"
+    },
+    {
+      "id": 23,
+      "question": "What are the cybersecurity requirements for passwords?",
+      "expected_answer": "Passwords must be at least 12 characters with mixed case, numbers, symbols, and changed every 90 days.",
+      "expected_node_ids": ["password_security_requirements"],
+      "expected_sources": ["cybersecurity_policy.pdf"],
+      "expected_page_ranges": [[6, 8]],
+      "category": "security"
+    },
+    {
+      "id": 24,
+      "question": "How should conflicts of interest be disclosed?",
+      "expected_answer": "Disclose potential conflicts immediately to manager and compliance officer using disclosure form.",
+      "expected_node_ids": ["conflict_interest_disclosure"],
+      "expected_sources": ["ethics_policy.pdf"],
+      "expected_page_ranges": [[15, 18]],
+      "category": "ethics"
+    },
+    {
+      "id": 25,
+      "question": "What is the policy on workplace diversity and inclusion?",
+      "expected_answer": "Company promotes inclusive environment with equal opportunities regardless of background or identity.",
+      "expected_node_ids": ["diversity_inclusion_policy"],
+      "expected_sources": ["diversity_policy.pdf"],
+      "expected_page_ranges": [[1, 5]],
+      "category": "diversity"
+    },
+    {
+      "id": 26,
+      "question": "How should intellectual property be protected?",
+      "expected_answer": "All work-related innovations belong to company and must be disclosed through invention disclosure process.",
+      "expected_node_ids": ["intellectual_property_protection"],
+      "expected_sources": ["ip_policy.pdf"],
+      "expected_page_ranges": [[10, 13]],
+      "category": "intellectual_property"
+    },
+    {
+      "id": 27,
+      "question": "What are the guidelines for vendor selection?",
+      "expected_answer": "Use approved vendor list, obtain multiple quotes for purchases over $5000, and follow procurement process.",
+      "expected_node_ids": ["vendor_selection_guidelines"],
+      "expected_sources": ["procurement_policy.pdf"],
+      "expected_page_ranges": [[25, 28]],
+      "category": "procurement"
+    },
+    {
+      "id": 28,
+      "question": "What is the policy on employee referral bonuses?",
+      "expected_answer": "Employees receive $1000 bonus for successful referrals who complete 90-day probation period.",
+      "expected_node_ids": ["employee_referral_bonus"],
+      "expected_sources": ["recruitment_policy.pdf"],
+      "expected_page_ranges": [[12, 14]],
+      "category": "recruitment"
+    },
+    {
+      "id": 29,
+      "question": "How should emergency evacuations be conducted?",
+      "expected_answer": "Follow designated evacuation routes, assemble at designated areas, and await all-clear from safety wardens.",
+      "expected_node_ids": ["emergency_evacuation_procedure"],
+      "expected_sources": ["emergency_procedures.pdf"],
+      "expected_page_ranges": [[8, 12]],
+      "category": "emergency"
+    },
+    {
+      "id": 30,
+      "question": "What are the requirements for document retention?",
+      "expected_answer": "Retain financial records 7 years, employee records 5 years after termination, and contracts 3 years after expiration.",
+      "expected_node_ids": ["document_retention_requirements"],
+      "expected_sources": ["records_management.pdf"],
+      "expected_page_ranges": [[15, 18]],
+      "category": "records_management"
+    },
+    {
+      "id": 31,
+      "question": "What is the policy on working from home equipment?",
+      "expected_answer": "Company provides laptop and monitor; employee responsible for ergonomic setup and internet connectivity.",
+      "expected_node_ids": ["remote_equipment_policy"],
+      "expected_sources": ["remote_work_policy.pdf"],
+      "expected_page_ranges": [[12, 15]],
+      "category": "remote_work"
+    },
+    {
+      "id": 32,
+      "question": "How should quality issues be escalated?",
+      "expected_answer": "Report quality issues immediately to quality assurance team and document in quality management system.",
+      "expected_node_ids": ["quality_issue_escalation"],
+      "expected_sources": ["quality_policy.pdf"],
+      "expected_page_ranges": [[20, 22]],
+      "category": "quality"
+    },
+    {
+      "id": 33,
+      "question": "What are the guidelines for client entertainment expenses?",
+      "expected_answer": "Client entertainment limited to $150 per person with business purpose documentation required.",
+      "expected_node_ids": ["client_entertainment_guidelines"],
+      "expected_sources": ["expense_policy.pdf"],
+      "expected_page_ranges": [[28, 30]],
+      "category": "expenses"
+    },
+    {
+      "id": 34,
+      "question": "What is the process for software license requests?",
+      "expected_answer": "Submit software requests through IT portal with business justification and budget approval.",
+      "expected_node_ids": ["software_license_requests"],
+      "expected_sources": ["it_policy.pdf"],
+      "expected_page_ranges": [[35, 37]],
+      "category": "it_policy"
+    },
+    {
+      "id": 35,
+      "question": "How should personnel changes be communicated?",
+      "expected_answer": "HR announces personnel changes via company newsletter with appropriate lead time and transition planning.",
+      "expected_node_ids": ["personnel_change_communication"],
+      "expected_sources": ["hr_communication.pdf"],
+      "expected_page_ranges": [[8, 10]],
+      "category": "communication"
+    },
+    {
+      "id": 36,
+      "question": "What are the requirements for contractor agreements?",
+      "expected_answer": "All contractors must sign confidentiality agreements and comply with company security policies.",
+      "expected_node_ids": ["contractor_agreement_requirements"],
+      "expected_sources": ["contractor_policy.pdf"],
+      "expected_page_ranges": [[5, 8]],
+      "category": "contractors"
+    },
+    {
+      "id": 37,
+      "question": "What is the policy on personal phone calls during work?",
+      "expected_answer": "Personal calls should be limited to breaks and lunch periods except for emergencies.",
+      "expected_node_ids": ["personal_phone_policy"],
+      "expected_sources": ["workplace_policy.pdf"],
+      "expected_page_ranges": [[18, 19]],
+      "category": "workplace"
+    },
+    {
+      "id": 38,
+      "question": "How should environmental incidents be reported?",
+      "expected_answer": "Report environmental incidents immediately to safety officer and document in environmental management system.",
+      "expected_node_ids": ["environmental_incident_reporting"],
+      "expected_sources": ["environmental_policy.pdf"],
+      "expected_page_ranges": [[22, 25]],
+      "category": "environmental"
+    },
+    {
+      "id": 39,
+      "question": "What are the guidelines for company vehicle use?",
+      "expected_answer": "Company vehicles for business use only, maintain valid license, and report accidents immediately.",
+      "expected_node_ids": ["company_vehicle_guidelines"],
+      "expected_sources": ["vehicle_policy.pdf"],
+      "expected_page_ranges": [[10, 13]],
+      "category": "vehicle"
+    },
+    {
+      "id": 40,
+      "question": "What is the process for internal job transfers?",
+      "expected_answer": "Submit transfer request with manager approval, meet position requirements, and complete transition period.",
+      "expected_node_ids": ["internal_transfer_process"],
+      "expected_sources": ["career_development.pdf"],
+      "expected_page_ranges": [[15, 18]],
+      "category": "career"
+    },
+    {
+      "id": 41,
+      "question": "How should budget variances be handled?",
+      "expected_answer": "Report budget variances over 5% to finance team with explanation and corrective action plan.",
+      "expected_node_ids": ["budget_variance_handling"],
+      "expected_sources": ["financial_controls.pdf"],
+      "expected_page_ranges": [[12, 15]],
+      "category": "finance"
+    },
+    {
+      "id": 42,
+      "question": "What are the requirements for safety equipment?",
+      "expected_answer": "Use appropriate PPE for job tasks, inspect equipment regularly, and report damaged equipment immediately.",
+      "expected_node_ids": ["safety_equipment_requirements"],
+      "expected_sources": ["safety_policy.pdf"],
+      "expected_page_ranges": [[8, 11]],
+      "category": "safety"
+    },
+    {
+      "id": 43,
+      "question": "What is the policy on competitive intelligence?",
+      "expected_answer": "Gather competitive information through legal means only, no unauthorized access to competitor systems.",
+      "expected_node_ids": ["competitive_intelligence_policy"],
+      "expected_sources": ["business_ethics.pdf"],
+      "expected_page_ranges": [[25, 28]],
+      "category": "business_ethics"
+    },
+    {
+      "id": 44,
+      "question": "How should customer data be protected?",
+      "expected_answer": "Customer data must be encrypted, access-controlled, and handled according to privacy regulations.",
+      "expected_node_ids": ["customer_data_protection"],
+      "expected_sources": ["data_privacy_policy.pdf"],
+      "expected_page_ranges": [[5, 9]],
+      "category": "privacy"
+    },
+    {
+      "id": 45,
+      "question": "What are the guidelines for team meetings?",
+      "expected_answer": "Schedule meetings with agenda, start/end on time, and distribute minutes within 24 hours.",
+      "expected_node_ids": ["team_meeting_guidelines"],
+      "expected_sources": ["meeting_policy.pdf"],
+      "expected_page_ranges": [[3, 6]],
+      "category": "meetings"
+    },
+    {
+      "id": 46,
+      "question": "What is the process for equipment maintenance?",
+      "expected_answer": "Schedule preventive maintenance annually, report issues immediately, and use only approved service providers.",
+      "expected_node_ids": ["equipment_maintenance_process"],
+      "expected_sources": ["maintenance_policy.pdf"],
+      "expected_page_ranges": [[15, 18]],
+      "category": "maintenance"
+    },
+    {
+      "id": 47,
+      "question": "How should project deadlines be managed?",
+      "expected_answer": "Set realistic timelines, track progress weekly, and escalate delays to project manager immediately.",
+      "expected_node_ids": ["project_deadline_management"],
+      "expected_sources": ["project_management.pdf"],
+      "expected_page_ranges": [[22, 25]],
+      "category": "project_management"
+    },
+    {
+      "id": 48,
+      "question": "What are the requirements for supplier audits?",
+      "expected_answer": "Conduct annual supplier audits for critical vendors focusing on quality, compliance, and security.",
+      "expected_node_ids": ["supplier_audit_requirements"],
+      "expected_sources": ["supplier_management.pdf"],
+      "expected_page_ranges": [[18, 22]],
+      "category": "supplier_management"
+    },
+    {
+      "id": 49,
+      "question": "What is the policy on knowledge sharing?",
+      "expected_answer": "Document processes in knowledge base, conduct regular training sessions, and mentor new team members.",
+      "expected_node_ids": ["knowledge_sharing_policy"],
+      "expected_sources": ["knowledge_management.pdf"],
+      "expected_page_ranges": [[8, 12]],
+      "category": "knowledge_management"
+    },
+    {
+      "id": 50,
+      "question": "How should regulatory compliance be maintained?",
+      "expected_answer": "Monitor regulatory changes, update policies annually, and conduct compliance training quarterly.",
+      "expected_node_ids": ["regulatory_compliance_maintenance"],
+      "expected_sources": ["compliance_policy.pdf"],
+      "expected_page_ranges": [[1, 5]],
+      "category": "compliance"
+    }
+  ]
+}

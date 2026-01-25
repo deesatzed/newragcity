@@ -1,0 +1,192 @@
+version: '3.8'
+
+services:
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:v1.7.4
+    container_name: ersatz_rag_qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - ersatz_rag_network
+    healthcheck:
+      test: ["CMD-SHELL", "exit 0"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # OpenSearch - Lexical/BM25 Search Engine (single-node for development)
+  opensearch:
+    image: opensearchproject/opensearch:2.11.0
+    container_name: ersatz_rag_opensearch
+    environment:
+      - discovery.type=single-node
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - plugins.security.disabled=true
+      - cluster.name=ersatz_rag
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    networks:
+      - ersatz_rag_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9200/_cluster/health >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - opensearch_data:/usr/share/opensearch/data
+    restart: unless-stopped
+
+  # PageIndex Service - Medical Document Intelligence
+  pageindex:
+    build: ./pageindex_service
+    container_name: ersatz_rag_pageindex
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./regulus/.env
+    depends_on:
+      - qdrant
+    networks:
+      - ersatz_rag_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:8000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    volumes:
+      - ./WS_ED:/app/documents:ro
+    command: ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment:
+      - THALAMUS_USE_REGULUS_HYBRID=true
+      - REGULUS_URL=http://regulus-backend:8000
+
+  # Regulus Backend - Hybrid Retrieval API (Option B)
+  regulus-backend:
+    build: ./regulus/backend
+    container_name: ersatz_rag_regulus_backend
+    ports:
+      - "8080:8000"
+    environment:
+      - DATABASE_URL=sqlite:////tmp/regulus.db
+      - REGULUS_HYBRID_ENABLED=true
+      - HYBRID_EMBEDDING_MODEL=BAAI/bge-large-en-v1.5
+      - QDRANT_URL=http://qdrant:6333
+      - QDRANT_COLLECTION=regulus_docs
+      - OPENSEARCH_URL=http://opensearch:9200
+      - OPENSEARCH_INDEX=regulus_docs
+      - EMBED_BATCH_SIZE=16
+      - CHUNK_PARAS=2
+      - CHUNK_OVERLAP=1
+    depends_on:
+      - qdrant
+      - opensearch
+    networks:
+      - ersatz_rag_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8000/health >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  # Mem-Proxy - HTTP facade for Mem-Agent MCP (sandboxed memory volume)
+  memproxy:
+    build: ./mem_proxy
+    container_name: ersatz_rag_memproxy
+    ports:
+      - "8010:8010"
+    environment:
+      - MEM_AGENT_ENABLED=0
+      - MEM_PROXY_MEMORY_DIR=/app/memory
+    networks:
+      - ersatz_rag_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:8010/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    volumes:
+      - ./mem_agent/memory:/app/memory
+
+  # LEANN Service - Vector Database Operations
+  leann:
+    build: ./leann_service
+    container_name: ersatz_rag_leann
+    ports:
+      - "8001:8001"
+    depends_on:
+      - qdrant
+    networks:
+      - ersatz_rag_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:8001/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    command: ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]
+
+  # deepConf Service - Confidence Calculation
+  deepconf:
+    build: ./deepconf_service
+    container_name: ersatz_rag_deepconf
+    ports:
+      - "8002:8002"
+    env_file:
+      - ./regulus/.env
+    networks:
+      - ersatz_rag_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:8002/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    command: ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8002"]
+
+  # Thalamus Application - Medical AI Pipeline
+  thalamus:
+    build: ./thalamus
+    container_name: ersatz_rag_thalamus
+    ports:
+      - "8003:8000"
+    env_file:
+      - ./regulus/.env
+    depends_on:
+      - pageindex
+      - leann
+      - deepconf
+      - regulus-backend
+    networks:
+      - ersatz_rag_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:8000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    volumes:
+      - ./WS_ED:/app/documents:ro
+    command: ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+
+networks:
+  ersatz_rag_network:
+    driver: bridge
+
+volumes:
+  qdrant_data:
+    driver: local
+  opensearch_data:
+    driver: local

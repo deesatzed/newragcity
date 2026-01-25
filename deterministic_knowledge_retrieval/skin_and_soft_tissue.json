@@ -1,0 +1,166 @@
+{
+  "documentInfo": {
+    "title": "TUH-Inc. Empiric Antimicrobial Therapy Recommendations for Common Infections in Hospitalized Adults",
+    "system": "TUH-Inc.",
+    "versionDate": "2025-04-02",
+    "sourceFile": "ATTCHMENT A_Inpatient Empiric antimicrobial Recommendations for common infections_ver 2025-04-02_shared with ED.docx"
+  },
+  "infections": [
+    {
+      "id": "skin_soft_tissue_infection",
+      "name": "Skin and Soft Tissue Infection (SSTI)",
+      "diagnostics": null,
+      "pathways": [
+        {
+          "label": "Non-purulent (non-severe) cellulitis",
+          "eligibilityCriteria": {
+            "clinicalState": ["stable", "non-purulent", "no_systemic_symptoms"]
+          },
+          "duration": {"minDays": 5, "maxDays": 7},
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": ["none"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "cephalexin"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "cefazolin"}]}
+              ]
+            },
+            {
+              "allergyProfile": ["pcn_mild_rash"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "trimethoprim-sulfamethoxazole"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "cefazolin"}]}
+              ]
+            },
+            {
+              "allergyProfile": ["pcn_severe_anaphylaxis"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "trimethoprim-sulfamethoxazole"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "vancomycin"}]}
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Purulent (non-severe) cellulitis",
+          "eligibilityCriteria": {
+            "clinicalState": ["stable", "purulent", "no_systemic_symptoms"]
+          },
+          "duration": {"minDays": 5, "maxDays": 7, "notes": ["If I&D of abscess is performed, count 5-7 days from source control."]},
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": ["none", "pcn_mild_rash", "pcn_severe_anaphylaxis"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "trimethoprim-sulfamethoxazole"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "doxycycline"}]},
+                {"rank": 3, "primaryDrugs": [{"name": "vancomycin"}]}
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Injection-related cellulitis and/or xylazine related wounds (non-severe)",
+          "eligibilityCriteria": {
+            "clinicalState": ["stable", "no_systemic_symptoms"],
+            "riskFlags": ["injection_drug_use"]
+          },
+          "duration": {"minDays": 5, "maxDays": 7, "notes": ["If I&D of abscess is performed, count 5-7 days from source control."]},
+          "procedureRecommendations": ["In stable patients, hold OFF on antibiotics until wound care and thorough wound examination is performed."],
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": ["none"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "amoxicillin", "variants": [{"label": "1gm q12h PO"}]}, {"name": "doxycycline"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "trimethoprim-sulfamethoxazole"}]},
+                {"rank": 3, "primaryDrugs": [{"name": "vancomycin"}]},
+                {"rank": 4, "primaryDrugs": [{"name": "daptomycin"}]}
+              ]
+            },
+            {
+              "allergyProfile": ["pcn_mild_rash", "pcn_severe_anaphylaxis"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "trimethoprim-sulfamethoxazole"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "vancomycin"}]},
+                {"rank": 3, "primaryDrugs": [{"name": "daptomycin"}]}
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Severe sepsis patient with SSTI (non-necrotizing)",
+          "eligibilityCriteria": {
+            "clinicalState": ["severe_sepsis", "septic_shock"],
+            "riskFlags": ["non_necrotizing"]
+          },
+          "duration": {"notes": ["Duration depends on the causative pathogen and clinical scenario."]},
+          "consults": ["Please consult infectious diseases if assistance needed."],
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": ["none", "pcn_mild_rash"],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [{"name": "ceftriaxone"}, {"name": "vancomycin"}],
+                  "notes": [
+                    "Consider Cefepime if immunocompromised host.",
+                    "For vancomycin allergy, substitute with Linezolid or Daptomycin."
+                  ]
+                }
+              ]
+            },
+            {
+              "allergyProfile": ["pcn_severe_anaphylaxis"],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [{"name": "vancomycin"}, {"name": "aztreonam"}],
+                  "notes": ["For vancomycin allergy, substitute with Linezolid or Daptomycin."]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Necrotizing SSTI (NSTI)",
+          "eligibilityCriteria": {
+            "clinicalState": ["necrotizing_infection"]
+          },
+          "duration": {"notes": ["Duration depends on the causative pathogen and clinical scenario."]},
+          "procedureRecommendations": ["Recommend early general surgery consultation."],
+          "consults": ["Recommend ID consult."],
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": ["none"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "piperacillin-tazobactam"}, {"name": "linezolid"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "cefepime"}, {"name": "metronidazole"}, {"name": "linezolid"}]},
+                {"rank": 3, "primaryDrugs": [{"name": "piperacillin-tazobactam"}, {"name": "clindamycin"}, {"name": "vancomycin"}]},
+                {"rank": 4, "primaryDrugs": [{"name": "cefepime"}, {"name": "metronidazole"}, {"name": "vancomycin"}, {"name": "clindamycin"}]}
+              ]
+            },
+            {
+              "allergyProfile": ["pcn_mild_rash"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "cefepime"}, {"name": "metronidazole"}, {"name": "linezolid"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "cefepime"}, {"name": "metronidazole"}, {"name": "vancomycin"}, {"name": "clindamycin"}]}
+              ]
+            },
+            {
+              "allergyProfile": ["pcn_severe_anaphylaxis"],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [{"name": "aztreonam"}, {"name": "linezolid"}, {"name": "metronidazole"}],
+                  "notes": [
+                    "Consider meropenem in place of aztreonam/metronidazole if critically ill (i.e. ICU admission).",
+                    "If patient has a history of SJS/DRESS: use (Linezolid) OR (Vancomycin + Clindamycin) AND CONSULT INFECTIOUS DISEASES for guidance on gram negative coverage."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

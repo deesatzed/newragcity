@@ -1,0 +1,119 @@
+{
+  "documentInfo": {
+    "title": "TUH-Inc. Empiric Antimicrobial Therapy Recommendations for Common Infections in Hospitalized Adults",
+    "system": "TUH-Inc.",
+    "versionDate": "2025-04-02",
+    "sourceFile": "ATTCHMENT A_Inpatient Empiric antimicrobial Recommendations for common infections_ver 2025-04-02_shared with ED.docx"
+  },
+  "infections": [
+    {
+      "id": "meningitis",
+      "name": "Meningitis",
+      "diagnostics": {
+        "orders": ["Lumbar Puncture (LP)"],
+        "timing": "Strongly encourage urgent LP, however antibiotics should NOT be withheld."
+      },
+      "pathways": [
+        {
+          "label": "Community Acquired Meningitis",
+          "eligibilityCriteria": {"setting": "Community-Acquired"},
+          "duration": {"notes": ["Duration depends on the causative pathogen and clinical scenario."]},
+          "procedureRecommendations": [
+            "Consider adding dexamethasone 0.15mg/kg IV with the first dose administered 10-20 minutes before, or at least concomitant with, the first dose of antimicrobial therapy in adults with suspected or proven pneumococcal meningitis."
+          ],
+          "consults": ["ID consult highly recommended for the management of meningitis."],
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": ["none"],
+              "regimens": [{
+                "rank": 1,
+                "primaryDrugs": [{"name": "ceftriaxone", "variants": [{"label": "Meningitis/Endocarditis"}]}, {"name": "vancomycin"}],
+                "conditionalAdjuncts": [{
+                  "condition": "Patient is >50 years old, has a history of transplant, HIV, or is otherwise immunocompromised",
+                  "drugs": [{"name": "ampicillin", "variants": [{"label": "Meningitis"}]}]
+                }],
+                "notes": [
+                  "For vancomycin allergy, initiate ceftriaxone and CONSULT INFECTIOUS DISEASES.",
+                  "Consider acyclovir IV based on clinical presentation and CSF results."
+                ]
+              }]
+            },
+            {
+              "allergyProfile": ["pcn_mild_rash"],
+              "regimens": [{
+                "rank": 1,
+                "primaryDrugs": [{"name": "ceftriaxone", "variants": [{"label": "Meningitis/Endocarditis"}]}, {"name": "vancomycin"}],
+                "conditionalAdjuncts": [{
+                  "condition": "Patient is >50 years old, has a history of transplant, HIV, or is otherwise immunocompromised",
+                  "drugs": [{"name": "trimethoprim-sulfamethoxazole", "variants": [{"label": "IV - PCP treatment"}]}]
+                }],
+                "notes": [
+                  "If listeria coverage is needed and TMP/SMX is contraindicated, use Meropenem + Vancomycin instead of Ceftriaxone + Vancomycin.",
+                  "For vancomycin allergy, initiate ceftriaxone and CONSULT INFECTIOUS DISEASES.",
+                  "Consider acyclovir IV based on clinical presentation and CSF results."
+                ]
+              }]
+            },
+            {
+              "allergyProfile": ["pcn_severe_anaphylaxis"],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [{"name": "meropenem", "variants": [{"label": "Meningitis/High MIC"}]}, {"name": "vancomycin"}],
+                  "notes": [
+                    "APPLIES TO PATIENTS WITHOUT A HISTORY OF SJS/DRESS.",
+                    "CONSULT INFECTIOUS DISEASES.",
+                    "For vancomycin allergy, initiate meropenem and CONSULT INFECTIOUS DISEASES.",
+                    "Consider acyclovir IV based on clinical presentation and CSF results."
+                  ],
+                   "conditionalAdjuncts": [{
+                    "condition": "Patient is >50 years old, has a history of transplant, HIV, or is otherwise immunocompromised",
+                    "drugs": [{"name": "trimethoprim-sulfamethoxazole", "variants": [{"label": "IV - PCP treatment"}]}]
+                  }]
+                },
+                {
+                  "rank": 2,
+                  "primaryDrugs": [{"name": "vancomycin"}, {"name": "ciprofloxacin", "variants": [{"label": "IV - Severe systemic infection"}]}],
+                  "notes": [
+                    "APPLIES TO PATIENTS WITH A HISTORY OF SJS/DRESS.",
+                    "For vancomycin allergy, initiate ciprofloxacin and CONSULT INFECTIOUS DISEASES.",
+                    "Consider acyclovir IV based on clinical presentation and CSF results."
+                  ],
+                  "conditionalAdjuncts": [{
+                    "condition": "Patient is >50 years old, has a history of transplant, HIV, or is otherwise immunocompromised AND ciprofloxacin is used",
+                    "drugs": [{"name": "trimethoprim-sulfamethoxazole", "variants": [{"label": "IV - PCP treatment"}]}],
+                    "notes": ["Requires ID Consult."]
+                  }]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Healthcare associated/Ventriculitis",
+          "eligibilityCriteria": {"setting": "Healthcare-Associated"},
+          "duration": {"notes": ["Duration depends on the causative pathogen and clinical scenario."]},
+          "consults": ["Consult Infectious Diseases for all treatment pathways."],
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": ["none", "pcn_mild_rash"],
+              "regimens": [{
+                "rank": 1,
+                "primaryDrugs": [{"name": "cefepime", "variants": [{"label": "Neutropenic fever/CNS infections"}]}, {"name": "vancomycin"}],
+                "notes": ["For vancomycin allergy, initiate cefepime and CONSULT INFECTIOUS DISEASES."]
+              }]
+            },
+            {
+              "allergyProfile": ["pcn_severe_anaphylaxis"],
+              "regimens": [{
+                "rank": 1,
+                "primaryDrugs": [{"name": "aztreonam", "variants": [{"label": "Meningitis"}]}, {"name": "vancomycin"}],
+                "notes": ["For vancomycin allergy, initiate aztreonam and CONSULT INFECTIOUS DISEASES."]
+              }]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

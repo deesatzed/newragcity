@@ -1,0 +1,53 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    platform: linux/amd64
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://regulus_user:regulus_password@postgres:5432/regulus
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - PAGEINDEX_API_KEY=${PAGEINDEX_API_KEY}
+      - REDIS_URL=redis://redis:6379
+      - CONFIDENCE_THRESHOLD=0.80
+      - DEBUG=False
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - postgres
+      - redis
+    command: ["./wait-for-postgres.sh", "postgres"]
+
+  admin_frontend:
+    build: ./admin_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+
+  postgres:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=regulus
+      - POSTGRES_USER=regulus_user
+      - POSTGRES_PASSWORD=regulus_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:

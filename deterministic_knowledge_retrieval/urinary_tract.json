@@ -1,0 +1,323 @@
+{
+  "documentInfo": {
+    "title": "TUH-Inc. Empiric Antimicrobial Therapy Recommendations for Common Infections in Hospitalized Adults",
+    "system": "TUH-Inc.",
+    "versionDate": "2025-04-02",
+    "sourceFile": "ATTCHMENT A_Inpatient Empiric antimicrobial Recommendations for common infections_ver 2025-04-02_shared with ED.docx"
+  },
+  "infections": [
+    {
+      "id": "urinary_tract_infection",
+      "name": "Urinary Tract Infections (UTI)",
+      "diagnostics": {
+        "orders": [
+          "Urinalysis with reflex to urine culture (Ucx)"
+        ],
+        "timing": "Obtain prior to antibiotic initiation whenever possible.",
+        "deescalationRules": [],
+        "notes": [
+          "Pyuria on urinalysis (UA) alone is not an indication for antibiotic therapy. Always assess for symptoms (urinary symptoms, fever, hemodynamic instability) unless pregnant, planned urologic procedure, recent kidney transplant, neutropenia."
+        ]
+      },
+      "pathways": [
+        {
+          "label": "Cystitis (Urinary symptoms only)",
+          "eligibilityCriteria": {
+            "clinicalState": [
+              "no_fever",
+              "no_systemic_symptoms"
+            ]
+          },
+          "duration": {
+            "minDays": 1,
+            "maxDays": 7,
+            "notes": [
+              "Nitrofurantoin: 5 days",
+              "TMP/SMX: 3 days",
+              "Fosfomycin: 1 day",
+              "Cefazolin: 3-5 days",
+              "Cephalexin/Cefpodoxime: 5-7 days",
+              "In patients with functional or structural GU abnormalities, 7 days is often sufficient."
+            ]
+          },
+          "consults": [
+            "Discuss with ID if alternative regimen needed."
+          ],
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": [
+                "none",
+                "pcn_mild_rash"
+              ],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [
+                    {
+                      "name": "nitrofurantoin",
+                      "routes": ["PO"],
+                      "variants": [{
+                        "label": "Standard dose",
+                        "dosingByRenalFunction": [
+                          {"renalCategory": "gt_50", "dose": "100mg", "frequency": "q12h"},
+                          {"renalCategory": "50_30", "dose": "CONTRAINDICATED"},
+                          {"renalCategory": "29_10", "dose": "CONTRAINDICATED"},
+                          {"renalCategory": "lt_10_no_hd", "dose": "CONTRAINDICATED"},
+                          {"renalCategory": "hd", "dose": "CONTRAINDICATED"},
+                          {"renalCategory": "crrt", "dose": "CONTRAINDICATED"}
+                        ],
+                        "contraindications": ["CONTRAINDICATED in CrCl <=60ml/min"]
+                      }]
+                    }
+                  ]
+                },
+                {
+                  "rank": 2,
+                  "primaryDrugs": [
+                    {
+                      "name": "fosfomycin",
+                      "routes": ["PO"],
+                      "variants": [
+                        {"label": "Uncomplicated cystitis", "dose": "3g", "frequency": "x 1 dose"},
+                        {"label": "Complicated cystitis (off-label)", "dose": "3g", "frequency": "every other day x 3 doses"}
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "rank": 3,
+                  "primaryDrugs": [
+                    {
+                      "name": "trimethoprim-sulfamethoxazole",
+                      "routes": ["PO"],
+                      "variants": [
+                        {"label": "PO - Standard"}
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "rank": 4,
+                  "primaryDrugs": [
+                    {
+                      "name": "cephalexin",
+                      "routes": ["PO"],
+                      "variants": [{
+                        "label": "Standard dose",
+                        "dosingByRenalFunction": [
+                          {"renalCategory": "gt_50", "doseOptions": [{"dose": "500mg", "frequency": "q6h"}, {"dose": "1000mg", "frequency": "q8h"}]},
+                          {"renalCategory": "50_30", "doseOptions": [{"dose": "500mg", "frequency": "q6h"}, {"dose": "1000mg", "frequency": "q8h"}]},
+                          {"renalCategory": "29_10", "doseOptions": [{"dose": "500mg", "frequency": "q8h"}, {"dose": "1000mg", "frequency": "q12h"}]},
+                          {"renalCategory": "lt_10_no_hd", "doseOptions": [{"dose": "500mg", "frequency": "q12h"}, {"dose": "1000mg", "frequency": "q24h"}]},
+                          {"renalCategory": "hd", "doseOptions": [{"dose": "500mg", "frequency": "q12-24h AD"}, {"dose": "1000mg", "frequency": "q24h AD"}]},
+                          {"renalCategory": "crrt", "dose": null, "additionalNotes": ["Consider alternative agent"], "dataQuality": {"renalBin": "unknown"}}
+                        ]
+                      }]
+                    }
+                  ],
+                   "notes": ["Use if preferred regimens are contraindicated."]
+                },
+                {
+                  "rank": 5,
+                  "primaryDrugs": [
+                    {
+                      "name": "cefpodoxime",
+                      "routes": ["PO"],
+                      "variants": [{
+                        "label": "Standard dose",
+                        "dosingByRenalFunction": [
+                          {"renalCategory": "gt_50", "dose": "200mg", "frequency": "q12h"},
+                          {"renalCategory": "50_30", "dose": "200mg", "frequency": "q12h"},
+                          {"renalCategory": "29_10", "dose": "200mg", "frequency": "q24h"},
+                          {"renalCategory": "lt_10_no_hd", "dose": "200mg", "frequency": "q24h"},
+                          {"renalCategory": "hd", "doseOptions": [{"dose": "100mg", "frequency": "daily"}, {"dose": "200mg", "frequency": "3x/wk AD"}]},
+                          {"renalCategory": "crrt", "dose": null, "additionalNotes": ["No data"], "dataQuality": {"renalBin": "unknown"}}
+                        ]
+                      }]
+                    }
+                  ],
+                   "notes": ["Use if preferred regimens are contraindicated."]
+                },
+                {
+                  "rank": 6,
+                  "primaryDrugs": [
+                     {
+                      "name": "cefazolin",
+                      "routes": ["IV"],
+                      "variants": [{
+                        "label": "Standard dose",
+                        "dosingByRenalFunction": [
+                          {"renalCategory": "gt_50", "dose": "1-2g", "frequency": "q8h"},
+                          {"renalCategory": "50_30", "dose": "1g", "frequency": "q8h"},
+                          {"renalCategory": "29_10", "dose": "1g", "frequency": "q12h"},
+                          {"renalCategory": "lt_10_no_hd", "dose": "1g", "frequency": "q24h"},
+                          {"renalCategory": "hd", "doseOptions": [{"dose": "1g", "frequency": "q24h AD"}, {"dose": "2g", "frequency": "after each HD"}]},
+                          {"renalCategory": "crrt", "doseOptions": [{"dose": "1g", "frequency": "q8h"}, {"dose": "2g", "frequency": "q12h"}], "dataQuality": {"renalBin": "limited"}}
+                        ]
+                      }]
+                    }
+                  ],
+                  "notes": ["Use if preferred regimens are contraindicated."]
+                }
+              ]
+            },
+            {
+              "allergyProfile": [
+                "pcn_severe_anaphylaxis"
+              ],
+              "regimens": [
+                {
+                  "rank": 1,
+                  "primaryDrugs": [{"name": "nitrofurantoin"}]
+                },
+                {
+                  "rank": 2,
+                  "primaryDrugs": [{"name": "fosfomycin"}]
+                },
+                {
+                  "rank": 3,
+                  "primaryDrugs": [{"name": "trimethoprim-sulfamethoxazole"}]
+                },
+                {
+                  "rank": 4,
+                  "primaryDrugs": [
+                    {
+                      "name": "ciprofloxacin",
+                      "routes": ["IV", "PO"],
+                      "variants": [
+                        {"label": "IV - Uncomplicated UTI", "dose": "200mg"},
+                        {"label": "PO - Uncomplicated UTI", "dose": "250mg"}
+                      ]
+                    }
+                  ],
+                  "notes": ["If unable to take PO"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Catheter-associated UTI (without sepsis)",
+          "eligibilityCriteria": {
+            "clinicalState": ["stable", "no_sepsis", "no_upper_tract_disease"]
+          },
+          "duration": {"minDays": 5, "maxDays": 7},
+          "procedureRecommendations": ["Remove or replace catheter prior to UA/Ucx collection & initiation of antibiotic therapy whenever feasible."],
+          "treatmentRecommendations": [
+             {
+              "allergyProfile": ["none", "pcn_mild_rash"],
+              "regimens": [
+                {"rank": 1, "notes": ["Observation off antibiotic and await culture results."]},
+                {"rank": 2, "primaryDrugs": [{"name": "fosfomycin"}]},
+                {"rank": 3, "primaryDrugs": [{"name": "ceftriaxone"}]}
+              ]
+            },
+            {
+              "allergyProfile": ["pcn_severe_anaphylaxis"],
+              "regimens": [
+                {"rank": 1, "notes": ["Observation off antibiotic and await culture results."]},
+                {"rank": 2, "primaryDrugs": [{"name": "fosfomycin"}]},
+                {"rank": 3, "primaryDrugs": [{"name": "ciprofloxacin"}]}
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Catheter-associated UTI (with sepsis)",
+          "eligibilityCriteria": {
+            "clinicalState": ["sepsis", "septic_shock", "upper_tract_disease"]
+          },
+          "duration": {"minDays": 7, "maxDays": 14},
+           "procedureRecommendations": ["Remove or replace catheter prior to UA/Ucx collection & initiation of antibiotic therapy whenever feasible."],
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": ["none"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "piperacillin-tazobactam"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "cefepime"}]}
+              ],
+              "conditionalAdjuncts": [{
+                "condition": "History of ESBL, cephalosporin resistance, or septic shock",
+                "drugs": [{"name": "meropenem"}]
+              }]
+            },
+            {
+              "allergyProfile": ["pcn_mild_rash"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "cefepime"}]}
+              ],
+              "conditionalAdjuncts": [{
+                "condition": "History of ESBL, cephalosporin resistance, or septic shock",
+                "drugs": [{"name": "meropenem"}]
+              }]
+            },
+            {
+               "allergyProfile": ["pcn_severe_anaphylaxis"],
+               "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "aztreonam"}, {"name": "vancomycin"}]}
+               ],
+               "notes": ["If history of ESBL/septic shock, benefit of carbapenem should be weighed for IgE-mediated reactions; discuss with ID for SJS/DRESS."]
+            }
+          ]
+        },
+        {
+          "label": "Febrile UTI, Pyelonephritis (Community-acquired)",
+          "eligibilityCriteria": {"setting": "Community-Acquired"},
+          "duration": {"minDays": 7, "notes": ["Most can be treated with 7 days if good clinical response."]},
+          "treatmentRecommendations": [
+            {
+              "allergyProfile": ["none", "pcn_mild_rash"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "ceftriaxone"}]}
+              ],
+              "conditionalAdjuncts": [{
+                "condition": "History of ESBL, cephalosporin resistance, or septic shock",
+                "drugs": [{"name": "ertapenem"}]
+              }]
+            },
+            {
+               "allergyProfile": ["pcn_severe_anaphylaxis"],
+               "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "aztreonam"}, {"name": "vancomycin"}]}
+               ],
+               "notes": ["If history of ESBL/septic shock, benefit of carbapenem should be weighed for IgE-mediated reactions; discuss with ID for SJS/DRESS."]
+            }
+          ]
+        },
+        {
+          "label": "Febrile UTI, Pyelonephritis (Hospital-acquired)",
+          "eligibilityCriteria": {"setting": "Hospital-Acquired (>48 hrs after admission)"},
+          "duration": {"minDays": 7, "notes": ["Most can be treated with 7 days if good clinical response."]},
+          "treatmentRecommendations": [
+             {
+              "allergyProfile": ["none"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "piperacillin-tazobactam"}]},
+                {"rank": 2, "primaryDrugs": [{"name": "cefepime"}]}
+              ],
+              "conditionalAdjuncts": [{
+                "condition": "History of ESBL, cephalosporin resistance, or septic shock",
+                "drugs": [{"name": "meropenem"}]
+              }]
+            },
+            {
+              "allergyProfile": ["pcn_mild_rash"],
+              "regimens": [
+                {"rank": 1, "primaryDrugs": [{"name": "cefepime"}]}
+              ],
+              "conditionalAdjuncts": [{
+                "condition": "History of ESBL, cephalosporin resistance, or septic shock",
+                "drugs": [{"name": "meropenem"}]
+              }]
+            },
+            {
+               "allergyProfile": ["pcn_severe_anaphylaxis"],
+               "regimens": [],
+               "notes": ["No recommendation provided in source document."]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

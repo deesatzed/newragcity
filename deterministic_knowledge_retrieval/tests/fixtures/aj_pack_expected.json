@@ -1,0 +1,13 @@
+{
+  "manifest": {
+    "dataset_id": "clinical_infections",
+    "version": "1.1.0"
+  },
+  "toc": {
+    "toc_id": "infection_guidance_toc"
+  },
+  "required_sections": [
+    "bite_wounds_bite_wound_infection",
+    "urinary_tract_urinary_tract_infection"
+  ]
+}
