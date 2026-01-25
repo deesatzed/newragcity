@@ -1,0 +1,315 @@
+version: '3.8'
+
+# newragcity - Complete RAG System Docker Composition
+# Orchestrates: UltraRAG + DKR + Ersatz (LEANN/PageIndex/deepConf) + RoT + The Vault
+
+services:
+  # ============================================
+  # Core Orchestration Service
+  # ============================================
+  ultrarag:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: newragcity-ultrarag
+    ports:
+      - "5050:5050"  # Web UI
+      - "8000:8000"  # REST API
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - DATABASE_URL=postgresql://newragcity:${POSTGRES_PASSWORD:-changeme}@postgres:5432/newragcity
+      - REDIS_URL=redis://redis:6379
+      - DATA_DIR=/data
+      - INDEX_DIR=/data/indexes
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - CONFIDENCE_THRESHOLD=${CONFIDENCE_THRESHOLD:-0.80}
+      - DEVELOPER_THRESHOLD=${DEVELOPER_THRESHOLD:-0.95}
+    volumes:
+      - ./data:/data
+      - ./pipeline:/ultrarag/pipeline
+      - ./scripts:/ultrarag/scripts
+    depends_on:
+      - postgres
+      - redis
+      - dkr-server
+      - ersatz-server
+      - rot-server
+    networks:
+      - newragcity
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5050/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ============================================
+  # DKR (Deterministic Knowledge Retrieval)
+  # ============================================
+  dkr-server:
+    build:
+      context: ./deterministic_knowledge_retrieval
+      dockerfile: Dockerfile
+    container_name: newragcity-dkr
+    environment:
+      - DATA_DIR=/data
+      - CORPUS_PATH=/data/corpus.jsonl
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    volumes:
+      - ./data:/data
+      - ./deterministic_knowledge_retrieval:/app
+    networks:
+      - newragcity
+    restart: unless-stopped
+    command: python -m src.agents.run_server
+
+  # ============================================
+  # Ersatz (Semantic Search with LEANN/PageIndex/deepConf)
+  # ============================================
+  ersatz-server:
+    build:
+      context: ./ersatz_rag
+      dockerfile: Dockerfile
+    container_name: newragcity-ersatz
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+      - PAGEINDEX_API_KEY=${PAGEINDEX_API_KEY:-${OPENAI_API_KEY}}
+      - INDEX_PATH=/data/indexes/cognitron_index
+      - MEMORY_PATH=/data/memory.db
+      - CONFIDENCE_THRESHOLD=${CONFIDENCE_THRESHOLD:-0.80}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LEANN_BACKEND=hnsw
+      - EMBEDDING_MODEL=ibm-granite/granite-embedding-english-r2
+    volumes:
+      - ./data:/data
+      - ./ersatz_rag:/app
+    networks:
+      - newragcity
+    restart: unless-stopped
+    depends_on:
+      - leann-service
+      - deepconf-service
+      - pageindex-service
+
+  # ============================================
+  # LEANN Vector Search Service
+  # ============================================
+  leann-service:
+    build:
+      context: ./ersatz_rag/leann_service
+      dockerfile: Dockerfile
+    container_name: newragcity-leann
+    environment:
+      - EMBEDDING_MODEL=ibm-granite/granite-embedding-english-r2
+      - INDEX_PATH=/data/indexes/leann_index
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    volumes:
+      - ./data:/data
+    networks:
+      - newragcity
+    restart: unless-stopped
+    ports:
+      - "8001:8001"  # LEANN API
+
+  # ============================================
+  # deepConf Confidence Scoring Service
+  # ============================================
+  deepconf-service:
+    build:
+      context: ./ersatz_rag/deepconf_service
+      dockerfile: Dockerfile
+    container_name: newragcity-deepconf
+    environment:
+      - DEVELOPER_THRESHOLD=${DEVELOPER_THRESHOLD:-0.95}
+      - PRODUCTION_THRESHOLD=${CONFIDENCE_THRESHOLD:-0.80}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    networks:
+      - newragcity
+    restart: unless-stopped
+    ports:
+      - "8002:8002"  # deepConf API
+
+  # ============================================
+  # PageIndex Document Intelligence Service
+  # ============================================
+  pageindex-service:
+    build:
+      context: ./ersatz_rag/pageindex_service
+      dockerfile: Dockerfile
+    container_name: newragcity-pageindex
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - PAGEINDEX_API_KEY=${PAGEINDEX_API_KEY:-${OPENAI_API_KEY}}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    networks:
+      - newragcity
+    restart: unless-stopped
+    ports:
+      - "8003:8003"  # PageIndex API
+
+  # ============================================
+  # RoT (Render-of-Thought Reasoning)
+  # ============================================
+  rot-server:
+    build:
+      context: ./servers/rot_reasoning
+      dockerfile: Dockerfile
+    container_name: newragcity-rot
+    environment:
+      - MULTIMODAL_MODEL=${MULTIMODAL_MODEL:-qwen2.5-vl:7b}
+      - MODEL_FRAMEWORK=${MODEL_FRAMEWORK:-ollama}
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - DATA_DIR=/data
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - COMPRESSION_RATIO_TARGET=3.5
+    volumes:
+      - ./data:/data
+      - ./servers/rot_reasoning:/app
+    networks:
+      - newragcity
+    restart: unless-stopped
+    depends_on:
+      - ollama
+
+  # ============================================
+  # Infrastructure Services
+  # ============================================
+
+  # PostgreSQL with pgvector for metadata and vector storage
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: newragcity-postgres
+    environment:
+      - POSTGRES_DB=newragcity
+      - POSTGRES_USER=newragcity
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - newragcity
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U newragcity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching and job queues
+  redis:
+    image: redis:7-alpine
+    container_name: newragcity-redis
+    networks:
+      - newragcity
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Ollama for local LLM (optional - users can provide external API)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: newragcity-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - newragcity
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ============================================
+  # Optional: Web UI (if separate from ultrarag)
+  # ============================================
+  # web-ui:
+  #   build:
+  #     context: ./ui
+  #     dockerfile: Dockerfile
+  #   container_name: newragcity-ui
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - API_URL=http://ultrarag:8000
+  #   depends_on:
+  #     - ultrarag
+  #   networks:
+  #     - newragcity
+  #   restart: unless-stopped
+
+# ============================================
+# Networks
+# ============================================
+networks:
+  newragcity:
+    driver: bridge
+    name: newragcity-network
+
+# ============================================
+# Volumes
+# ============================================
+volumes:
+  postgres-data:
+    name: newragcity-postgres-data
+  redis-data:
+    name: newragcity-redis-data
+  ollama-data:
+    name: newragcity-ollama-data
+
+# ============================================
+# Usage Instructions
+# ============================================
+#
+# 1. Copy .env.example to .env and configure your API keys
+#
+# 2. Start all services:
+#    docker-compose up -d
+#
+# 3. View logs:
+#    docker-compose logs -f
+#
+# 4. Access services:
+#    - Web UI: http://localhost:5050
+#    - REST API: http://localhost:8000
+#    - PostgreSQL: localhost:5432
+#    - Ollama: http://localhost:11434
+#
+# 5. Stop all services:
+#    docker-compose down
+#
+# 6. Stop and remove all data:
+#    docker-compose down -v
+#
+# 7. Initialize Ollama model (first time):
+#    docker-compose exec ollama ollama pull qwen2.5-vl:7b
+#
+# 8. Upload documents:
+#    curl -X POST http://localhost:8000/upload -F "file=@document.pdf"
+#
+# 9. Query the system:
+#    curl -X POST http://localhost:8000/query \
+#      -H "Content-Type: application/json" \
+#      -d '{"query": "What is the incident response procedure?"}'
