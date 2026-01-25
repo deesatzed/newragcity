@@ -4,11 +4,27 @@
 # Python cache and temporary files
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 *.npy
 *.index
+.Python
 
-# VSCode editor configuration
+# Virtual environments
+env/
+venv/
+.env
+.venv
+
+# Python package metadata
+src/*.egg-info/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDE and editor configuration
 .vscode/
+.idea/
+*.swp
 
 # Runtime and download caches
 .infinity_cache/
@@ -17,12 +33,19 @@ embedding/
 index/
 output/
 logs/
+*.log
 test/
 corpora/
 data/chat_sessions/
 data/knowledge_base/
-# Environment variables and secrets
-.env
+
+# Project Data (Generated Artifacts)
+data/corpus.jsonl
+data/golden_set.json
+data/metrics.json
+data/cognitron_index/
+data/input_docs/*
+!data/input_docs/PROOF_OF_LIFE.txt
 
 # Example configuration files
 examples/parameter/*.yaml
@@ -30,6 +53,3 @@ examples/server/*.yaml
 
 # Server configuration files for each server module
 servers/*/server.yaml
-
-# Python package metadata
-src/*.egg-info/

@@ -1,0 +1,36 @@
+servers:
+  dkr: servers/dkr
+  ersatz: servers/ersatz
+  prompt: servers/prompt
+  local_llm: servers/local_llm
+
+pipeline:
+  # 1. Initialization
+  - dkr.init_agent
+  - ersatz.init_agent
+  - local_llm.init_client
+  
+  # 2. Retrieval
+  - dkr.lookup_exact:
+      input:
+        max_chunk_chars: $max_chunk_chars # From parameter.yaml
+      output:
+        results: dkr_results
+  - ersatz.semantic_search:
+      input:
+        max_chunk_chars: $max_chunk_chars # From parameter.yaml
+      output:
+        chunks: ersatz_chunks
+  
+  # 3. Prompt Synthesis
+  - prompt.synthesis:
+      input:
+        dkr_results: dkr_results
+        ersatz_chunks: ersatz_chunks
+      output:
+        prompt_ls: synthesized_prompt
+
+  # 4. Generation
+  - local_llm.generate:
+      input:
+        prompt: $synthesized_prompt

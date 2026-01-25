@@ -1,0 +1,3 @@
+ersatz_path: /Volumes/WS4TB/newragcity/UltraRAG-main/ersatz_rag/cognitron
+index_path: /Volumes/WS4TB/newragcity/UltraRAG-main/TheVault/data/cognitron_index
+\n# Context Management\nmax_chunk_chars: 2000
