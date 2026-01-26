@@ -1,0 +1,96 @@
+{
+  "test_name": "Unified Integration Test",
+  "timestamp": "2026-01-26 10:21:12",
+  "components_tested": [
+    "DKR",
+    "Ersatz",
+    "RoT"
+  ],
+  "tests": {
+    "dkr_component": {
+      "component": "DKR",
+      "status": "pass",
+      "details": {
+        "benchmark_script": "exists",
+        "results_validation": {
+          "file_exists": true,
+          "timestamp": null,
+          "is_real": true
+        },
+        "source_structure": "valid"
+      }
+    },
+    "ersatz_imports": {
+      "component": "Ersatz",
+      "status": "pass",
+      "details": {
+        "leann_version": "available (version unknown)",
+        "pageindex": "available",
+        "sentence_transformers": "available",
+        "google_generativeai": "available"
+      }
+    },
+    "rot_workaround": {
+      "component": "RoT",
+      "status": "pass",
+      "details": {
+        "imports": "success",
+        "analysis_test": {
+          "token_estimate": 19,
+          "compression_ratio": 1.0
+        },
+        "note": "Model not trained - theoretical metrics only"
+      }
+    },
+    "multi_approach_routing": {
+      "component": "Multi-Approach Routing",
+      "status": "pass",
+      "details": {
+        "routing_results": [
+          {
+            "query": "What is the exact protocol for CAP?",
+            "routed_to": "DKR",
+            "expected": "DKR",
+            "correct": true
+          },
+          {
+            "query": "Tell me about pneumonia treatment options and considerations",
+            "routed_to": "Ersatz",
+            "expected": "Ersatz",
+            "correct": true
+          },
+          {
+            "query": "Explain the reasoning behind choosing antibiotics for pneumonia",
+            "routed_to": "RoT",
+            "expected": "RoT",
+            "correct": true
+          }
+        ],
+        "accuracy": 1.0
+      }
+    },
+    "benchmark_validation": {
+      "component": "Benchmark Results",
+      "status": "pass",
+      "details": {
+        "dkr_results": {
+          "file_exists": true,
+          "num_queries": null,
+          "relevance": null
+        },
+        "rot_results": {
+          "file_exists": true,
+          "num_contexts": 4,
+          "avg_compression": 1.5524711178954729
+        }
+      }
+    }
+  },
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "warnings": 0,
+    "pass_rate": 1.0
+  }
+}

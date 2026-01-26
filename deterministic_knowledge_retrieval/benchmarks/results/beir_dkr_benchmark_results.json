@@ -1,0 +1,518 @@
+{
+  "benchmark_name": "BEIR nfcorpus - DKR Evaluation",
+  "dataset": "nfcorpus",
+  "num_queries_tested": 50,
+  "timestamp": "2026-01-26 10:26:05",
+  "metrics": {
+    "ndcg@10": 0.00109894007399291,
+    "recall@100": 0.013160984275770567
+  },
+  "per_query_results": [
+    {
+      "query_id": "PLAIN-2",
+      "query": "Do Cholesterol Statin Drugs Cause Breast Cancer?",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 24,
+      "ndcg@10": 0.0,
+      "recall@100": 0.041666666666666664
+    },
+    {
+      "query_id": "PLAIN-12",
+      "query": "Exploiting Autophagy to Live Longer",
+      "dkr_label": "Pneumonia (PNA)",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 30,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-23",
+      "query": "How to Reduce Exposure to Alkylphenols Through Your Diet",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 90,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-33",
+      "query": "What\u2019s Driving America\u2019s Obesity Problem?",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 32,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-44",
+      "query": "Who Should be Careful About Curcumin?",
+      "dkr_label": "Infected Diabetic Wound",
+      "dkr_score": 6.0,
+      "num_retrieved": 100,
+      "num_relevant": 58,
+      "ndcg@10": 0.0,
+      "recall@100": 0.034482758620689655
+    },
+    {
+      "query_id": "PLAIN-56",
+      "query": "Foods for Glaucoma",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 50,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-68",
+      "query": "What is Actually in Chicken Nuggets?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 55,
+      "ndcg@10": 0.0,
+      "recall@100": 0.01818181818181818
+    },
+    {
+      "query_id": "PLAIN-78",
+      "query": "What Do Meat Purge and Cola Have in Common?",
+      "dkr_label": "Skin and Soft Tissue Infection (SSTI)",
+      "dkr_score": 5.0,
+      "num_retrieved": 100,
+      "num_relevant": 62,
+      "ndcg@10": 0.013588647290003163,
+      "recall@100": 0.03225806451612903
+    },
+    {
+      "query_id": "PLAIN-91",
+      "query": "Chronic Headaches and Pork Parasites",
+      "dkr_label": "Skin and Soft Tissue Infection (SSTI)",
+      "dkr_score": 3.0,
+      "num_retrieved": 100,
+      "num_relevant": 64,
+      "ndcg@10": 0.013257176630971987,
+      "recall@100": 0.0625
+    },
+    {
+      "query_id": "PLAIN-102",
+      "query": "Stopping Heart Disease in Childhood",
+      "dkr_label": "Pneumonia (PNA)",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 24,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-112",
+      "query": "Food Dyes and ADHD",
+      "dkr_label": "Skin and Soft Tissue Infection (SSTI)",
+      "dkr_score": 3.0,
+      "num_retrieved": 100,
+      "num_relevant": 56,
+      "ndcg@10": 0.014247970006662744,
+      "recall@100": 0.017857142857142856
+    },
+    {
+      "query_id": "PLAIN-123",
+      "query": "How Citrus Might Help Keep Your Hands Warm",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 51,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-133",
+      "query": "Starving Tumors of Their Blood Supply",
+      "dkr_label": "Infected Diabetic Wound",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 36,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-143",
+      "query": "Are Dental X-Rays Safe?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 51,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0392156862745098
+    },
+    {
+      "query_id": "PLAIN-153",
+      "query": "How Should I Take Probiotics?",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 47,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-165",
+      "query": "Breast Cancer & Alcohol: How Much is Safe?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 36,
+      "ndcg@10": 0.0,
+      "recall@100": 0.08333333333333333
+    },
+    {
+      "query_id": "PLAIN-175",
+      "query": "Diet and Cellulite",
+      "dkr_label": "Skin and Soft Tissue Infection (SSTI)",
+      "dkr_score": 3.0,
+      "num_retrieved": 100,
+      "num_relevant": 37,
+      "ndcg@10": 0.013853209772007602,
+      "recall@100": 0.08108108108108109
+    },
+    {
+      "query_id": "PLAIN-186",
+      "query": "Best Treatment for Constipation",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 24,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-196",
+      "query": "Should We Avoid Titanium Dioxide?",
+      "dkr_label": "Infected Diabetic Wound",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 69,
+      "ndcg@10": 0.0,
+      "recall@100": 0.028985507246376812
+    },
+    {
+      "query_id": "PLAIN-207",
+      "query": "Avoiding Cooked Meat Carcinogens",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 55,
+      "ndcg@10": 0.0,
+      "recall@100": 0.01818181818181818
+    },
+    {
+      "query_id": "PLAIN-217",
+      "query": "Plant-Based Diets for Psoriasis",
+      "dkr_label": "Meningitis",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 36,
+      "ndcg@10": 0.0,
+      "recall@100": 0.027777777777777776
+    },
+    {
+      "query_id": "PLAIN-227",
+      "query": "Increasing Muscle Strength with Fenugreek",
+      "dkr_label": "Infected Diabetic Wound",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 40,
+      "ndcg@10": 0.0,
+      "recall@100": 0.025
+    },
+    {
+      "query_id": "PLAIN-238",
+      "query": "How Chemically Contaminated Are We?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 54,
+      "ndcg@10": 0.0,
+      "recall@100": 0.037037037037037035
+    },
+    {
+      "query_id": "PLAIN-248",
+      "query": "Treating an Enlarged Prostate With Diet",
+      "dkr_label": "Neutropenic Fever",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 31,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-259",
+      "query": "Optimal Phytosterol Dose and Source",
+      "dkr_label": "Skin and Soft Tissue Infection (SSTI)",
+      "dkr_score": 5.0,
+      "num_retrieved": 100,
+      "num_relevant": 14,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-270",
+      "query": "Is Caffeinated Tea Really Dehydrating?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 52,
+      "ndcg@10": 0.0,
+      "recall@100": 0.019230769230769232
+    },
+    {
+      "query_id": "PLAIN-280",
+      "query": "Mercury Testing Recommended Before Pregnancy",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 20,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-291",
+      "query": "Stool Size and Breast Cancer Risk",
+      "dkr_label": "Pneumonia (PNA)",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 13,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-307",
+      "query": "Vitamin D: Shedding some light on the new recommendations",
+      "dkr_label": "Skin and Soft Tissue Infection (SSTI)",
+      "dkr_score": 6.0,
+      "num_retrieved": 100,
+      "num_relevant": 3,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-320",
+      "query": "Breast Cancer and Diet",
+      "dkr_label": "Skin and Soft Tissue Infection (SSTI)",
+      "dkr_score": 3.0,
+      "num_retrieved": 100,
+      "num_relevant": 42,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-332",
+      "query": "Can antioxidant-rich spices counteract the effects of a high-fat meal?",
+      "dkr_label": "Infected Diabetic Wound",
+      "dkr_score": 8.0,
+      "num_retrieved": 100,
+      "num_relevant": 2,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-344",
+      "query": "Dioxins Stored in Our Own Fat May Increase Diabetes Risk",
+      "dkr_label": "Pneumonia (PNA)",
+      "dkr_score": 6.0,
+      "num_retrieved": 100,
+      "num_relevant": 61,
+      "ndcg@10": 0.0,
+      "recall@100": 0.01639344262295082
+    },
+    {
+      "query_id": "PLAIN-358",
+      "query": "Didn't another study show carnitine was good for the heart?",
+      "dkr_label": "Infected Diabetic Wound",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 3,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-371",
+      "query": "Any update on the scary in vitro avocado data?",
+      "dkr_label": "Neutropenic Fever",
+      "dkr_score": 6.0,
+      "num_retrieved": 100,
+      "num_relevant": 2,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-383",
+      "query": "What do you think of Dr. Jenkins' take on paleolithic diets?",
+      "dkr_label": "Infected Diabetic Wound",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 5,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-395",
+      "query": "What about pepper plus turmeric in V8 juice?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 3,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-407",
+      "query": "Is annatto food coloring safe?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 3,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-418",
+      "query": "Fresh fruit versus frozen--which is better?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 3,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-430",
+      "query": "Are krill oil supplements better than fish oil capsules?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 8,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-441",
+      "query": "Is apple cider vinegar good for you?",
+      "dkr_label": "Urinary Tract Infections (UTI)",
+      "dkr_score": 6.0,
+      "num_retrieved": 100,
+      "num_relevant": 5,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-457",
+      "query": "How can you believe in any scientific study?",
+      "dkr_label": "Pneumonia (PNA)",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 5,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-468",
+      "query": "Is vitamin D3 (cholecalciferol) preferable to D2 (ergocalciferol)?",
+      "dkr_label": "Intra-abdominal Infection",
+      "dkr_score": 4.0,
+      "num_retrieved": 100,
+      "num_relevant": 10,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-478",
+      "query": "accidents",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 1,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-488",
+      "query": "adenovirus 36",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 15,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-499",
+      "query": "African-American",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 34,
+      "ndcg@10": 0.0,
+      "recall@100": 0.029411764705882353
+    },
+    {
+      "query_id": "PLAIN-510",
+      "query": "airport scanners",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 6,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-520",
+      "query": "Alli",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 1,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-531",
+      "query": "alternative medicine",
+      "dkr_label": "Urinary Tract Infections (UTI)",
+      "dkr_score": 2.0,
+      "num_retrieved": 100,
+      "num_relevant": 308,
+      "ndcg@10": 0.0,
+      "recall@100": 0.045454545454545456
+    },
+    {
+      "query_id": "PLAIN-541",
+      "query": "American Dental Association",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 6,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    },
+    {
+      "query_id": "PLAIN-551",
+      "query": "amnesia",
+      "dkr_label": "Bite Wounds (human, dog, cat)",
+      "dkr_score": 0.0,
+      "num_retrieved": 100,
+      "num_relevant": 2,
+      "ndcg@10": 0.0,
+      "recall@100": 0.0
+    }
+  ],
+  "notes": [
+    "DKR is specialized for antibiotic/infection treatment",
+    "BEIR nfcorpus covers broader medical/nutrition topics",
+    "Lower scores expected for out-of-domain queries",
+    "Mapping from DKR knowledge to BEIR corpus is approximate"
+  ]
+}

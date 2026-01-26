@@ -53,3 +53,5 @@ examples/server/*.yaml
 
 # Server configuration files for each server module
 servers/*/server.yaml
+datasets/
+*.zip
