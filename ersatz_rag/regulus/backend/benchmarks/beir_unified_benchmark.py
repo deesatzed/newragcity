@@ -257,7 +257,7 @@ def main():
         index_path=index_path,
         queries=queries,
         qrels=qrels,
-        max_queries=50  # Run on 50 queries (increase to 323 for full benchmark)
+        max_queries=323  # FULL BENCHMARK: All 323 queries with relevance judgments
     )
 
     # Display results

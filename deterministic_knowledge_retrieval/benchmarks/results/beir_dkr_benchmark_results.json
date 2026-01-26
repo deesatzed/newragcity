@@ -2,7 +2,7 @@
   "benchmark_name": "BEIR nfcorpus - DKR Evaluation",
   "dataset": "nfcorpus",
   "num_queries_tested": 50,
-  "timestamp": "2026-01-26 10:26:05",
+  "timestamp": "2026-01-26 11:06:50",
   "metrics": {
     "ndcg@10": 0.00109894007399291,
     "recall@100": 0.013160984275770567
