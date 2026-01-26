@@ -1,0 +1,80 @@
+{
+  "benchmark_name": "RoT Workaround - Baseline Complexity Analysis",
+  "note": "Model not trained - showing baseline metrics only",
+  "num_contexts": 4,
+  "timestamp": "2026-01-26 09:09:58",
+  "metrics": {
+    "avg_token_estimate": 305.5,
+    "avg_theoretical_compression": 1.5524711178954729,
+    "min_tokens": 13,
+    "max_tokens": 784
+  },
+  "per_context_results": [
+    {
+      "name": "Short Query",
+      "category": "short",
+      "analysis": {
+        "char_count": 55,
+        "word_count": 7,
+        "token_estimate": 13,
+        "sentence_count": 2,
+        "unique_words": 7,
+        "repetition_ratio": 0.0,
+        "theoretical_compression_ratio": 1.0
+      }
+    },
+    {
+      "name": "Medium Context",
+      "category": "medium",
+      "analysis": {
+        "char_count": 487,
+        "word_count": 56,
+        "token_estimate": 121,
+        "sentence_count": 7,
+        "unique_words": 45,
+        "repetition_ratio": 0.1964285714285714,
+        "theoretical_compression_ratio": 1.5892857142857142
+      }
+    },
+    {
+      "name": "Long Context",
+      "category": "long",
+      "analysis": {
+        "char_count": 1219,
+        "word_count": 141,
+        "token_estimate": 304,
+        "sentence_count": 14,
+        "unique_words": 111,
+        "repetition_ratio": 0.21276595744680848,
+        "theoretical_compression_ratio": 1.6382978723404253
+      }
+    },
+    {
+      "name": "Very Long Context",
+      "category": "very_long",
+      "analysis": {
+        "char_count": 3136,
+        "word_count": 339,
+        "token_estimate": 784,
+        "sentence_count": 30,
+        "unique_words": 228,
+        "repetition_ratio": 0.327433628318584,
+        "theoretical_compression_ratio": 1.9823008849557522
+      }
+    }
+  ],
+  "limitations": [
+    "RoT model not trained - cannot measure actual compression",
+    "Token estimates are approximate (not using real tokenizer)",
+    "Compression ratios are theoretical (based on text analysis)",
+    "No visual rendering performance measured",
+    "No actual speedup or cost reduction measured"
+  ],
+  "next_steps": [
+    "Train RoT Stage 1 model (OCR + text rendering)",
+    "Train RoT Stage 2 model (reasoning compression)",
+    "Run real benchmarks with trained model",
+    "Compare against actual token counts",
+    "Measure real compression ratios and speedup"
+  ]
+}

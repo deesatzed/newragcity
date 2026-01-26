@@ -2,22 +2,22 @@
   "dkr_results": {
     "benchmark_name": "DKR Medical Knowledge Retrieval",
     "dataset": "Internal Medical Knowledge Base",
-    "num_queries": 10,
+    "num_queries": 41,
     "num_sections": 11,
-    "timestamp": "2026-01-26 09:02:09",
+    "timestamp": "2026-01-26 09:08:52",
     "metrics": {
-      "relevance": 0.775,
-      "keyword_precision": 0.9,
-      "entity_precision": 0.65,
-      "ndcg@1": 0.775,
-      "avg_latency_ms": 0.20911693572998047
+      "relevance": 0.5650406504065041,
+      "keyword_precision": 0.7520325203252032,
+      "entity_precision": 0.3780487804878049,
+      "ndcg@1": 0.5650406504065041,
+      "avg_latency_ms": 0.19686978037764385
     },
     "per_query_results": [
       {
         "query": "Community-acquired pneumonia treatment",
-        "category": "infection",
+        "category": "pneumonia",
         "retrieval_score": 107.0,
-        "latency_ms": 0.24700164794921875,
+        "latency_ms": 0.2498626708984375,
         "retrieved_section": "Pneumonia (PNA)",
         "metrics": {
           "keyword_precision": 1.0,
@@ -28,10 +28,66 @@
         }
       },
       {
+        "query": "CAP antibiotic therapy",
+        "category": "pneumonia",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.2129077911376953,
+        "retrieved_section": "Pneumonia (PNA)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 2,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "Pneumonia management guidelines",
+        "category": "pneumonia",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.2040863037109375,
+        "retrieved_section": "Pneumonia (PNA)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 1,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "Respiratory infection pneumonia",
+        "category": "pneumonia",
+        "retrieval_score": 5.0,
+        "latency_ms": 0.19884109497070312,
+        "retrieved_section": "Pneumonia (PNA)",
+        "metrics": {
+          "keyword_precision": 0.5,
+          "entity_precision": 0.0,
+          "relevance": 0.25,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Lung infection community setting",
+        "category": "pneumonia",
+        "retrieval_score": 8.0,
+        "latency_ms": 0.20122528076171875,
+        "retrieved_section": "Pneumonia (PNA)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 2,
+          "entities_found": 0
+        }
+      },
+      {
         "query": "Urinary tract infection antibiotics",
-        "category": "infection",
+        "category": "uti",
         "retrieval_score": 6.0,
-        "latency_ms": 0.21791458129882812,
+        "latency_ms": 0.19884109497070312,
         "retrieved_section": "Urinary Tract Infections (UTI)",
         "metrics": {
           "keyword_precision": 1.0,
@@ -42,10 +98,66 @@
         }
       },
       {
-        "query": "Meningitis empiric therapy",
-        "category": "infection",
+        "query": "UTI treatment protocol",
+        "category": "uti",
         "retrieval_score": 3.0,
-        "latency_ms": 0.20933151245117188,
+        "latency_ms": 0.1957416534423828,
+        "retrieved_section": "Urinary Tract Infections (UTI)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 2,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "Bladder infection medication",
+        "category": "uti",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.19812583923339844,
+        "retrieved_section": "Intra-abdominal Infection",
+        "metrics": {
+          "keyword_precision": 0.5,
+          "entity_precision": 0.0,
+          "relevance": 0.25,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Cystitis antibiotic choice",
+        "category": "uti",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.1971721649169922,
+        "retrieved_section": "Urinary Tract Infections (UTI)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 1,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "Urinary infection treatment guidelines",
+        "category": "uti",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.20003318786621094,
+        "retrieved_section": "Bite Wounds (human, dog, cat)",
+        "metrics": {
+          "keyword_precision": 0.0,
+          "entity_precision": 0.0,
+          "relevance": 0.0,
+          "keywords_found": 0,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Meningitis empiric therapy",
+        "category": "meningitis",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.1971721649169922,
         "retrieved_section": "Meningitis",
         "metrics": {
           "keyword_precision": 1.0,
@@ -56,10 +168,66 @@
         }
       },
       {
+        "query": "CNS infection treatment",
+        "category": "meningitis",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.19812583923339844,
+        "retrieved_section": "Bite Wounds (human, dog, cat)",
+        "metrics": {
+          "keyword_precision": 0.0,
+          "entity_precision": 0.0,
+          "relevance": 0.0,
+          "keywords_found": 0,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Bacterial meningitis antibiotics",
+        "category": "meningitis",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.19812583923339844,
+        "retrieved_section": "Meningitis",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 1,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "CSF infection management",
+        "category": "meningitis",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.19621849060058594,
+        "retrieved_section": "Meningitis",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 2,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Brain infection emergency treatment",
+        "category": "meningitis",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.2009868621826172,
+        "retrieved_section": "Bite Wounds (human, dog, cat)",
+        "metrics": {
+          "keyword_precision": 0.0,
+          "entity_precision": 0.0,
+          "relevance": 0.0,
+          "keywords_found": 0,
+          "entities_found": 0
+        }
+      },
+      {
         "query": "Sepsis management protocol",
-        "category": "infection",
+        "category": "sepsis",
         "retrieval_score": 2.0,
-        "latency_ms": 0.20194053649902344,
+        "latency_ms": 0.19407272338867188,
         "retrieved_section": "Infected Diabetic Wound",
         "metrics": {
           "keyword_precision": 1.0,
@@ -70,10 +238,66 @@
         }
       },
       {
+        "query": "Septic shock treatment",
+        "category": "sepsis",
+        "retrieval_score": 5.0,
+        "latency_ms": 0.1926422119140625,
+        "retrieved_section": "Septic Arthritis",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 2,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Bloodstream infection sepsis",
+        "category": "sepsis",
+        "retrieval_score": 5.0,
+        "latency_ms": 0.1900196075439453,
+        "retrieved_section": "Intra-abdominal Infection",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Unknown origin fever sepsis",
+        "category": "sepsis",
+        "retrieval_score": 105.0,
+        "latency_ms": 0.1990795135498047,
+        "retrieved_section": "Sepsis of Unknown Origin",
+        "metrics": {
+          "keyword_precision": 0.5,
+          "entity_precision": 0.0,
+          "relevance": 0.25,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Severe infection sepsis guidelines",
+        "category": "sepsis",
+        "retrieval_score": 7.0,
+        "latency_ms": 0.1919269561767578,
+        "retrieved_section": "Intra-abdominal Infection",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
         "query": "Skin and soft tissue infection",
-        "category": "infection",
+        "category": "skin",
         "retrieval_score": 10.0,
-        "latency_ms": 0.21386146545410156,
+        "latency_ms": 0.2002716064453125,
         "retrieved_section": "Infected Diabetic Wound",
         "metrics": {
           "keyword_precision": 1.0,
@@ -84,10 +308,66 @@
         }
       },
       {
+        "query": "Cellulitis antibiotic treatment",
+        "category": "skin",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.18978118896484375,
+        "retrieved_section": "Infected Diabetic Wound",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 2,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Wound infection management",
+        "category": "skin",
+        "retrieval_score": 5.0,
+        "latency_ms": 0.18906593322753906,
+        "retrieved_section": "Infected Diabetic Wound",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Soft tissue abscess",
+        "category": "skin",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.19097328186035156,
+        "retrieved_section": "Infected Diabetic Wound",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Diabetic foot ulcer infection",
+        "category": "skin",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.19788742065429688,
+        "retrieved_section": "Infected Diabetic Wound",
+        "metrics": {
+          "keyword_precision": 0.5,
+          "entity_precision": 0.0,
+          "relevance": 0.25,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
         "query": "Intra-abdominal infection coverage",
-        "category": "infection",
+        "category": "abdomen",
         "retrieval_score": 11.0,
-        "latency_ms": 0.20313262939453125,
+        "latency_ms": 0.19598007202148438,
         "retrieved_section": "Intra-abdominal Infection",
         "metrics": {
           "keyword_precision": 1.0,
@@ -98,10 +378,66 @@
         }
       },
       {
+        "query": "Peritonitis treatment",
+        "category": "abdomen",
+        "retrieval_score": 2.0,
+        "latency_ms": 0.186920166015625,
+        "retrieved_section": "Bite Wounds (human, dog, cat)",
+        "metrics": {
+          "keyword_precision": 0.0,
+          "entity_precision": 1.0,
+          "relevance": 0.5,
+          "keywords_found": 0,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "Abdominal infection antibiotics",
+        "category": "abdomen",
+        "retrieval_score": 8.0,
+        "latency_ms": 0.18978118896484375,
+        "retrieved_section": "Intra-abdominal Infection",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Bowel perforation infection",
+        "category": "abdomen",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.19097328186035156,
+        "retrieved_section": "Intra-abdominal Infection",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Anaerobic abdominal infection",
+        "category": "abdomen",
+        "retrieval_score": 6.0,
+        "latency_ms": 0.1900196075439453,
+        "retrieved_section": "Intra-abdominal Infection",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 1,
+          "entities_found": 1
+        }
+      },
+      {
         "query": "Neutropenic fever treatment",
-        "category": "infection",
+        "category": "neutropenic",
         "retrieval_score": 106.0,
-        "latency_ms": 0.19812583923339844,
+        "latency_ms": 0.19097328186035156,
         "retrieved_section": "Neutropenic Fever",
         "metrics": {
           "keyword_precision": 0.6666666666666666,
@@ -112,24 +448,66 @@
         }
       },
       {
-        "query": "Diabetic foot infection antibiotics",
-        "category": "infection",
-        "retrieval_score": 5.0,
-        "latency_ms": 0.20074844360351562,
-        "retrieved_section": "Infected Diabetic Wound",
+        "query": "Febrile neutropenia protocol",
+        "category": "neutropenic",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.19288063049316406,
+        "retrieved_section": "Urinary Tract Infections (UTI)",
         "metrics": {
-          "keyword_precision": 0.6666666666666666,
+          "keyword_precision": 0.5,
+          "entity_precision": 1.0,
+          "relevance": 0.75,
+          "keywords_found": 1,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "Cancer patient fever low white count",
+        "category": "neutropenic",
+        "retrieval_score": 5.0,
+        "latency_ms": 0.2067089080810547,
+        "retrieved_section": "Neutropenic Fever",
+        "metrics": {
+          "keyword_precision": 1.0,
           "entity_precision": 0.0,
-          "relevance": 0.3333333333333333,
+          "relevance": 0.5,
           "keywords_found": 2,
           "entities_found": 0
         }
       },
       {
-        "query": "Central line bloodstream infection",
-        "category": "infection",
+        "query": "Chemotherapy fever management",
+        "category": "neutropenic",
         "retrieval_score": 3.0,
-        "latency_ms": 0.20313262939453125,
+        "latency_ms": 0.19097328186035156,
+        "retrieved_section": "Neutropenic Fever",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Low neutrophil infection",
+        "category": "neutropenic",
+        "retrieval_score": 4.0,
+        "latency_ms": 0.1900196075439453,
+        "retrieved_section": "Septic Arthritis",
+        "metrics": {
+          "keyword_precision": 0.0,
+          "entity_precision": 0.0,
+          "relevance": 0.0,
+          "keywords_found": 0,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Central line bloodstream infection",
+        "category": "central_line",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.19693374633789062,
         "retrieved_section": "Central Line Infection",
         "metrics": {
           "keyword_precision": 0.6666666666666666,
@@ -140,10 +518,38 @@
         }
       },
       {
+        "query": "CLABSI treatment",
+        "category": "central_line",
+        "retrieval_score": 2.0,
+        "latency_ms": 0.18787384033203125,
+        "retrieved_section": "Bite Wounds (human, dog, cat)",
+        "metrics": {
+          "keyword_precision": 0.0,
+          "entity_precision": 0.0,
+          "relevance": 0.0,
+          "keywords_found": 0,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Catheter infection management",
+        "category": "central_line",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.18978118896484375,
+        "retrieved_section": "Intra-abdominal Infection",
+        "metrics": {
+          "keyword_precision": 0.0,
+          "entity_precision": 0.0,
+          "relevance": 0.0,
+          "keywords_found": 0,
+          "entities_found": 0
+        }
+      },
+      {
         "query": "Bite wound prophylaxis",
-        "category": "infection",
+        "category": "bite",
         "retrieval_score": 7.0,
-        "latency_ms": 0.19598007202148438,
+        "latency_ms": 0.19669532775878906,
         "retrieved_section": "Bite Wounds (human, dog, cat)",
         "metrics": {
           "keyword_precision": 1.0,
@@ -152,24 +558,52 @@
           "keywords_found": 2,
           "entities_found": 2
         }
+      },
+      {
+        "query": "Dog bite infection prevention",
+        "category": "bite",
+        "retrieval_score": 8.0,
+        "latency_ms": 0.20003318786621094,
+        "retrieved_section": "Bite Wounds (human, dog, cat)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 1,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "Animal bite antibiotic",
+        "category": "bite",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.1919269561767578,
+        "retrieved_section": "Bite Wounds (human, dog, cat)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 1,
+          "entities_found": 0
+        }
       }
     ]
   },
   "comparison": {
     "dkr": {
-      "relevance": 0.775,
-      "keyword_precision": 0.9,
-      "entity_precision": 0.65,
-      "ndcg@1": 0.775,
-      "avg_latency_ms": 0.20911693572998047
+      "relevance": 0.5650406504065041,
+      "keyword_precision": 0.7520325203252032,
+      "entity_precision": 0.3780487804878049,
+      "ndcg@1": 0.5650406504065041,
+      "avg_latency_ms": 0.19686978037764385
     },
     "baseline": {
-      "relevance": 0.7666666666666666,
+      "relevance": 0.38211382113821135,
       "method": "naive_word_overlap"
     },
     "improvement": {
-      "relevance": 0.008333333333333415,
-      "relative": 0.010869565217391412
+      "relevance": 0.18292682926829273,
+      "relative": 0.47872340425531934
     }
   }
 }
