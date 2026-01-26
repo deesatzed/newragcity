@@ -53,16 +53,25 @@ services:
       context: ./deterministic_knowledge_retrieval
       dockerfile: Dockerfile
     container_name: newragcity-dkr
+    ports:
+      - "8010:8010"  # DKR API
     environment:
       - DATA_DIR=/data
       - CORPUS_PATH=/data/corpus.jsonl
       - LOG_LEVEL=${LOG_LEVEL:-info}
+      - DKR_PORT=8010
     volumes:
       - ./data:/data
       - ./deterministic_knowledge_retrieval:/app
     networks:
       - newragcity
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8010/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     command: python -m src.agents.run_server
 
   # ============================================
@@ -73,16 +82,20 @@ services:
       context: ./ersatz_rag
       dockerfile: Dockerfile
     container_name: newragcity-ersatz
+    ports:
+      - "8020:8020"  # Ersatz Orchestration API
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
       - PAGEINDEX_API_KEY=${PAGEINDEX_API_KEY:-${OPENAI_API_KEY}}
+      - DATABASE_URL=postgresql://newragcity:${POSTGRES_PASSWORD:-changeme}@postgres:5432/newragcity
       - INDEX_PATH=/data/indexes/cognitron_index
       - MEMORY_PATH=/data/memory.db
       - CONFIDENCE_THRESHOLD=${CONFIDENCE_THRESHOLD:-0.80}
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LEANN_BACKEND=hnsw
       - EMBEDDING_MODEL=ibm-granite/granite-embedding-english-r2
+      - ERSATZ_PORT=8020
     volumes:
       - ./data:/data
       - ./ersatz_rag:/app
@@ -90,9 +103,16 @@ services:
       - newragcity
     restart: unless-stopped
     depends_on:
+      - postgres
       - leann-service
       - deepconf-service
       - pageindex-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8020/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   # ============================================
   # LEANN Vector Search Service
@@ -158,6 +178,8 @@ services:
       context: ./servers/rot_reasoning
       dockerfile: Dockerfile
     container_name: newragcity-rot
+    ports:
+      - "8030:8030"  # RoT Reasoning API
     environment:
       - MULTIMODAL_MODEL=${MULTIMODAL_MODEL:-qwen2.5-vl:7b}
       - MODEL_FRAMEWORK=${MODEL_FRAMEWORK:-ollama}
@@ -165,6 +187,7 @@ services:
       - DATA_DIR=/data
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - COMPRESSION_RATIO_TARGET=3.5
+      - ROT_PORT=8030
     volumes:
       - ./data:/data
       - ./servers/rot_reasoning:/app
@@ -173,6 +196,12 @@ services:
     restart: unless-stopped
     depends_on:
       - ollama
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8030/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   # ============================================
   # Infrastructure Services
