@@ -1,0 +1,175 @@
+{
+  "dkr_results": {
+    "benchmark_name": "DKR Medical Knowledge Retrieval",
+    "dataset": "Internal Medical Knowledge Base",
+    "num_queries": 10,
+    "num_sections": 11,
+    "timestamp": "2026-01-26 09:02:09",
+    "metrics": {
+      "relevance": 0.775,
+      "keyword_precision": 0.9,
+      "entity_precision": 0.65,
+      "ndcg@1": 0.775,
+      "avg_latency_ms": 0.20911693572998047
+    },
+    "per_query_results": [
+      {
+        "query": "Community-acquired pneumonia treatment",
+        "category": "infection",
+        "retrieval_score": 107.0,
+        "latency_ms": 0.24700164794921875,
+        "retrieved_section": "Pneumonia (PNA)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 3,
+          "entities_found": 2
+        }
+      },
+      {
+        "query": "Urinary tract infection antibiotics",
+        "category": "infection",
+        "retrieval_score": 6.0,
+        "latency_ms": 0.21791458129882812,
+        "retrieved_section": "Urinary Tract Infections (UTI)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 3,
+          "entities_found": 2
+        }
+      },
+      {
+        "query": "Meningitis empiric therapy",
+        "category": "infection",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.20933151245117188,
+        "retrieved_section": "Meningitis",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 2,
+          "entities_found": 2
+        }
+      },
+      {
+        "query": "Sepsis management protocol",
+        "category": "infection",
+        "retrieval_score": 2.0,
+        "latency_ms": 0.20194053649902344,
+        "retrieved_section": "Infected Diabetic Wound",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 2,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Skin and soft tissue infection",
+        "category": "infection",
+        "retrieval_score": 10.0,
+        "latency_ms": 0.21386146545410156,
+        "retrieved_section": "Infected Diabetic Wound",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 0.0,
+          "relevance": 0.5,
+          "keywords_found": 3,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Intra-abdominal infection coverage",
+        "category": "infection",
+        "retrieval_score": 11.0,
+        "latency_ms": 0.20313262939453125,
+        "retrieved_section": "Intra-abdominal Infection",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 2,
+          "entities_found": 2
+        }
+      },
+      {
+        "query": "Neutropenic fever treatment",
+        "category": "infection",
+        "retrieval_score": 106.0,
+        "latency_ms": 0.19812583923339844,
+        "retrieved_section": "Neutropenic Fever",
+        "metrics": {
+          "keyword_precision": 0.6666666666666666,
+          "entity_precision": 0.5,
+          "relevance": 0.5833333333333333,
+          "keywords_found": 2,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "Diabetic foot infection antibiotics",
+        "category": "infection",
+        "retrieval_score": 5.0,
+        "latency_ms": 0.20074844360351562,
+        "retrieved_section": "Infected Diabetic Wound",
+        "metrics": {
+          "keyword_precision": 0.6666666666666666,
+          "entity_precision": 0.0,
+          "relevance": 0.3333333333333333,
+          "keywords_found": 2,
+          "entities_found": 0
+        }
+      },
+      {
+        "query": "Central line bloodstream infection",
+        "category": "infection",
+        "retrieval_score": 3.0,
+        "latency_ms": 0.20313262939453125,
+        "retrieved_section": "Central Line Infection",
+        "metrics": {
+          "keyword_precision": 0.6666666666666666,
+          "entity_precision": 1.0,
+          "relevance": 0.8333333333333333,
+          "keywords_found": 2,
+          "entities_found": 1
+        }
+      },
+      {
+        "query": "Bite wound prophylaxis",
+        "category": "infection",
+        "retrieval_score": 7.0,
+        "latency_ms": 0.19598007202148438,
+        "retrieved_section": "Bite Wounds (human, dog, cat)",
+        "metrics": {
+          "keyword_precision": 1.0,
+          "entity_precision": 1.0,
+          "relevance": 1.0,
+          "keywords_found": 2,
+          "entities_found": 2
+        }
+      }
+    ]
+  },
+  "comparison": {
+    "dkr": {
+      "relevance": 0.775,
+      "keyword_precision": 0.9,
+      "entity_precision": 0.65,
+      "ndcg@1": 0.775,
+      "avg_latency_ms": 0.20911693572998047
+    },
+    "baseline": {
+      "relevance": 0.7666666666666666,
+      "method": "naive_word_overlap"
+    },
+    "improvement": {
+      "relevance": 0.008333333333333415,
+      "relative": 0.010869565217391412
+    }
+  }
+}
