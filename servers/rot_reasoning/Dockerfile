@@ -34,17 +34,15 @@ ENV PATH="/root/.cargo/bin:$PATH"
 WORKDIR /app
 
 # Copy dependency files first (for layer caching)
-COPY pyproject.toml .
 COPY requirements.txt .
 COPY .python-version .
 
 # Install Python dependencies
-RUN uv sync --no-dev || pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Copy source code
+# Copy source code and configuration
 COPY src/ ./src/
 COPY parameter.yaml .
-COPY README.md .
 
 # Copy test files (optional)
 COPY tests/ ./tests/ 2>/dev/null || true
