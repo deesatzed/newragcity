@@ -40,6 +40,7 @@ EXPOSE 8020
 
 # Environment variables (can be overridden by docker-compose)
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app
 ENV INDEX_PATH=/data/indexes/cognitron_index
 ENV MEMORY_PATH=/data/memory.db
 ENV LOG_LEVEL=info

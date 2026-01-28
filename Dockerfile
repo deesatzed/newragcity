@@ -19,9 +19,13 @@ RUN apt-get update && \
 WORKDIR /ultrarag
 COPY . .
 
-RUN uv sync --frozen --no-dev \
-    --extra retriever --extra generation --extra corpus --extra evaluation
+RUN uv sync --no-dev || \
+    (uv pip install flask werkzeug && uv sync --no-dev)
 
 EXPOSE 5050
 
-CMD ["ultrarag", "show", "ui", "--admin", "--port", "5050", "--host", "0.0.0.0"]
+# Set PYTHONPATH for proper module imports
+ENV PYTHONPATH=/ultrarag
+
+# Run Flask UI directly as Python module
+CMD ["/ultrarag/.venv/bin/python", "-m", "ui.backend.app"]

@@ -40,7 +40,9 @@ def get_doc_mcp_team(knowledge_base: Any):
         name="TOC_Agent",
         role="Router and Oracle",
         model=OpenAIChat(id="gpt-4o-mini"),
-        tools=[KnowledgeTools(knowledge=knowledge_base, search=True, think=True)],
+        tools=[KnowledgeTools(knowledge=knowledge_base)],
+        knowledge=knowledge_base,
+        search_knowledge=True,
         instructions=[
             "You are the Table of Contents agent responsible for routing.",
             "Use the knowledge search tool to retrieve the best candidate sections.",
