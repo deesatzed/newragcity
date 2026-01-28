@@ -44,9 +44,6 @@ RUN pip install -r requirements.txt
 COPY src/ ./src/
 COPY parameter.yaml .
 
-# Copy test files (optional)
-COPY tests/ ./tests/ 2>/dev/null || true
-
 # Create checkpoint directories
 RUN mkdir -p /app/checkpoints/stage1 /app/checkpoints/stage2
 
