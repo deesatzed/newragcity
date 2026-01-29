@@ -239,7 +239,7 @@ def main():
     # Initialize unified RAG system
     print("\nInitializing ThreeApproachRAG system...")
     rag_system = ThreeApproachRAG(
-        embedding_model="Alibaba-NLP/gte-Qwen2-7B-instruct",  # #1 on MTEB, proven SOTA
+        embedding_model="BAAI/bge-base-en-v1.5",  # 109M params, 768 dims, proven SOTA, no config needed
         confidence_threshold=0.80,
         enable_streaming=False
     )
