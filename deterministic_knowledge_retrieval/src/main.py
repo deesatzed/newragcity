@@ -46,7 +46,7 @@ def setup_app() -> Any:
             embedder=OpenAIEmbedder(id="text-embedding-3-small"),
         )
     )
-    knowledge_base.clear_content()
+    # knowledge_base.clear_content()  # API changed in newer agno - table auto-created fresh
     for file_content in aj_pack.content:
         for section in file_content.content:
             knowledge_base.add_content(
