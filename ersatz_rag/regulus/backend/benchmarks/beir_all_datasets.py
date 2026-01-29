@@ -222,7 +222,7 @@ class BEIRMultiDatasetBenchmark:
 
         # Initialize RAG system (reusable across datasets)
         self.rag_system = ThreeApproachRAG(
-            embedding_model="Qwen/Qwen3-Embedding-0.6B",  # Qwen3 for SOTA performance
+            embedding_model="Alibaba-NLP/gte-Qwen2-7B-instruct",  # #1 on MTEB, battle-tested
             confidence_threshold=0.80,
             enable_streaming=False
         )

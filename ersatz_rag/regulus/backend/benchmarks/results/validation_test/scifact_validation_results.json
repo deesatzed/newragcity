@@ -1,0 +1,44 @@
+{
+  "dataset": "scifact_validation",
+  "queries_tested": 10,
+  "system": "ThreeApproachRAG (PageIndex + LEANN + deepConf)",
+  "metrics": {
+    "nDCG@10": 0.42618595071429155,
+    "Recall@100": 1.0
+  },
+  "per_query_scores": {
+    "ndcg@10": [
+      0.0,
+      0.6309297535714575,
+      0.0,
+      0.0,
+      0.0,
+      0.6309297535714575,
+      0.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "recall@100": [
+      0.0,
+      2.0,
+      0.0,
+      0.0,
+      0.0,
+      2.0,
+      0.0,
+      2.0,
+      2.0,
+      2.0
+    ]
+  },
+  "domain": "Scientific Claims",
+  "difficulty": "hard",
+  "published_sota": 0.6885,
+  "elapsed_time_seconds": 118.8512909412384,
+  "elapsed_time_hours": 0.03301424748367733,
+  "queries_per_second": 0.08413875794537333,
+  "timestamp": "validation_test",
+  "vs_sota_improvement": -38.09935356364683,
+  "beats_sota": false
+}
