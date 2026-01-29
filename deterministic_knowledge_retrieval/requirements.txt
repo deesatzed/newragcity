@@ -2,6 +2,7 @@ agno
 openai
 pydantic>=1.10
 lancedb
+tantivy
 fastapi
 uvicorn
 python-dotenv

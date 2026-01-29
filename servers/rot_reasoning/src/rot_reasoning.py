@@ -14,8 +14,18 @@ from typing import Any, Dict, List, Optional
 import logging
 
 # Add UltraRAG source to path for imports
-ULTRARAG_ROOT = Path(__file__).resolve().parents[3]
-ULTRARAG_SRC = ULTRARAG_ROOT / "src"
+# Try to find UltraRAG root (handles both dev and Docker environments)
+current_file = Path(__file__).resolve()
+try:
+    # Development: servers/rot_reasoning/src/rot_reasoning.py -> go up 3 levels
+    ULTRARAG_ROOT = current_file.parents[3]
+    ULTRARAG_SRC = ULTRARAG_ROOT / "src"
+except IndexError:
+    # Docker: /app/src/rot_reasoning.py -> UltraRAG src might be elsewhere
+    # Look for ultrarag package in common locations
+    ULTRARAG_ROOT = Path("/ultrarag") if Path("/ultrarag").exists() else current_file.parent.parent
+    ULTRARAG_SRC = ULTRARAG_ROOT / "src" if (ULTRARAG_ROOT / "src").exists() else ULTRARAG_ROOT
+
 if str(ULTRARAG_SRC) not in sys.path:
     sys.path.insert(0, str(ULTRARAG_SRC))
 
