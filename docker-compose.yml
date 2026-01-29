@@ -130,7 +130,7 @@ services:
       - newragcity
     restart: unless-stopped
     ports:
-      - "8001:8001"  # LEANN API
+      - "8011:8001"  # LEANN API (mapped to 8011 to avoid port conflicts on macOS)
 
   # ============================================
   # deepConf Confidence Scoring Service
