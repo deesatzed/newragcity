@@ -239,7 +239,7 @@ def main():
     # Initialize unified RAG system
     print("\nInitializing ThreeApproachRAG system...")
     rag_system = ThreeApproachRAG(
-        embedding_model="sentence-transformers/all-MiniLM-L6-v2",  # Use smaller model for speed
+        embedding_model="Alibaba-NLP/Qwen3-Embedding-0.6B",  # Qwen3 embeddings for SOTA performance
         confidence_threshold=0.80,
         enable_streaming=False
     )

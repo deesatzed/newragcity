@@ -92,7 +92,7 @@ services:
       - CONFIDENCE_THRESHOLD=${CONFIDENCE_THRESHOLD:-0.80}
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LEANN_BACKEND=hnsw
-      - EMBEDDING_MODEL=ibm-granite/granite-embedding-english-r2
+      - EMBEDDING_MODEL=Alibaba-NLP/Qwen3-Embedding-0.6B
       - ERSATZ_PORT=8020
     volumes:
       - ./data:/data
@@ -121,7 +121,7 @@ services:
       dockerfile: Dockerfile
     container_name: newragcity-leann
     environment:
-      - EMBEDDING_MODEL=ibm-granite/granite-embedding-english-r2
+      - EMBEDDING_MODEL=Alibaba-NLP/Qwen3-Embedding-0.6B
       - INDEX_PATH=/data/indexes/leann_index
       - LOG_LEVEL=${LOG_LEVEL:-info}
     volumes:
