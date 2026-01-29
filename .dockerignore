@@ -1,0 +1,98 @@
+# Git and version control
+.git
+.gitignore
+.gitattributes
+*.git
+
+# Python cache and build artifacts
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+.eggs
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.coverage
+htmlcov
+*.cover
+
+# Virtual environments
+.venv
+venv
+ENV
+env
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Documentation and examples (will be in image if needed)
+docs
+examples/*.ipynb
+*.md
+!README.md
+
+# Test files and data
+tests
+test_*
+*_test.py
+
+# Large data files and indexes (mount as volumes instead)
+data/*
+datasets/*
+*.npy
+*.index
+*.faiss
+*.bin
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+
+# Logs and temporary files
+*.log
+logs
+tmp
+temp
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# Benchmarks results (not needed in container)
+ersatz_rag/regulus/backend/benchmarks/results/*
+
+# Other sub-projects (they have their own Dockerfiles)
+deterministic_knowledge_retrieval/*
+!deterministic_knowledge_retrieval/src
+!deterministic_knowledge_retrieval/Dockerfile
+!deterministic_knowledge_retrieval/requirements.txt
+
+ersatz_rag/*
+!ersatz_rag/Dockerfile
+!ersatz_rag/app
+!ersatz_rag/leann_service
+!ersatz_rag/deepconf_service
+!ersatz_rag/pageindex_service
+
+servers/rot_reasoning/*
+!servers/rot_reasoning/src
+!servers/rot_reasoning/Dockerfile
+!servers/rot_reasoning/requirements.txt
+!servers/rot_reasoning/parameter.yaml
